@@ -28,17 +28,6 @@ namespace NewUppgift1AI
 
         public override void Update(GameTime gameTime)
         {
-            //foreach (Pee pee in robot.peeList)
-            //{
-            //    if (robot.GetDistance(robot.Position, pee.position) < 25)
-            //    {
-            //        robot.peeList.Remove(pee);
-            //        break;                   
-            //    }
-
-            //    stateMachine.ChangeState(robot.MoveState);
-            //}
-
             if (PeeRemover())
             {
                 stateMachine.ChangeState(robot.MoveState);
