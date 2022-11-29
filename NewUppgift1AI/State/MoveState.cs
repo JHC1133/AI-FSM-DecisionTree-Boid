@@ -33,7 +33,11 @@ namespace NewUppgift1AI
         public override void Update(GameTime gameTime)
         {
 
-            if (CheckWallCollision())
+            if (CheckRobotPeeDistance(robot.peeList))
+            {
+                stateMachine.ChangeState(robot.ChaseState);
+            }
+            else if (CheckWallCollision())
             {
                 stateMachine.ChangeState(robot.CollissionState);
             }
@@ -49,6 +53,18 @@ namespace NewUppgift1AI
                     return true;
                 }
             }
+            return false;
+        }
+
+        public bool CheckRobotPeeDistance(List<Pee> peeList)
+        {
+            foreach (Pee pee in peeList)
+            {
+                if (robot.GetDistance(robot.Position, pee.position) < robot.DetectionRadius)
+                {
+                    return true;
+                }
+            }          
             return false;
         }
     }

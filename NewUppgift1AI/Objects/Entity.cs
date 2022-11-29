@@ -117,9 +117,9 @@ namespace NewUppgift1AI
         /// </summary>
         /// <param name="direction"></param>
         /// <param name="position"></param>
-        public virtual void SetDirection(Vector2 targetDirection, Vector2 position)
+        public virtual void SetDirection(Vector2 direction, Vector2 position)
         {
-            direction = targetDirection;
+            this.direction = direction - position;
             this.direction.Normalize();
             currentOrientation = direction;
         }

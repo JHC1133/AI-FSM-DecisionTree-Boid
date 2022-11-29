@@ -34,7 +34,7 @@ namespace NewUppgift1AI
                 if (robot.GetDistance(robot.Position, pee.position) < 25)
                 {
                     
-                    stateMachine.ChangeState(robot.MoveState);
+                    stateMachine.ChangeState(robot.CleanState);
                 }
             }
         }

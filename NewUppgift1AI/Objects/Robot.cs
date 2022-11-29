@@ -18,9 +18,12 @@ namespace NewUppgift1AI
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
+        public int DetectionRadius { get => detectionRadius; set => detectionRadius = value; }
 
         public List<Wall> walls;
         public List<Pee> peeList;
+
+        int detectionRadius = 500;
 
         public Robot(FiniteStateMachine stateMachine, List<Wall> walls, List<Pee> peeList)
         {
@@ -34,6 +37,7 @@ namespace NewUppgift1AI
             MoveState = new MoveState(this, stateMachine);
             CollissionState = new CollissionState(this, stateMachine);
             ChaseState = new ChaseState(this, stateMachine);
+            CleanState= new CleanState(this, stateMachine);
 
             stateMachine.Initialize(MoveState);
         }
