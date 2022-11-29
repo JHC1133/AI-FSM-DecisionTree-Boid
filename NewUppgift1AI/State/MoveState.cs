@@ -23,23 +23,6 @@ namespace NewUppgift1AI
 
             robot.SetDirection(robot.RandomMovement());
 
-            //if (robot.currentOrientation != Vector2.Zero)
-            //{
-            //    if (robot.RandomMovement() == robot.oldOrientation)
-            //    {
-            //        robot.SetDirection(robot.RandomMovement());
-            //    }
-            //    //else
-            //    //{
-            //    //    robot.SetDirection(robot.RandomMovement());
-            //    //}
-            //}
-            //else
-            //{
-                
-            //}
-
-
         }
 
         public override void Exit()

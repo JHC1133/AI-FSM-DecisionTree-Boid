@@ -11,15 +11,21 @@ namespace NewUppgift1AI
     internal class ObjectManager
     {
         public List<Wall> walls;
+        public List<Pee> peeList;
+
         Wall top, bottom, leftSide, rightSide;        
         Interior floor;
 
         Robot robot;
 
+        int peeDefaultVal = 7000;
+        int peeTimer = 7000;
+
         public ObjectManager(FiniteStateMachine stateMachine)
         {
             InitWalls();
             floor = new Interior(Vector2.Zero);
+            peeList = new List<Pee>();
 
             InitEntities(stateMachine);
 
@@ -28,12 +34,22 @@ namespace NewUppgift1AI
         {
             UpdateWalls();
             UpdateEntities(gameTime);
+            UpdatePeeList();
+
+            peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (peeTimer <= 0)
+            {
+                RandomPeeAdderPlaceHolder();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             floor.Draw(spriteBatch);
             DrawWalls(spriteBatch);
+
+            DrawPeeList(spriteBatch);
             DrawEntities(spriteBatch);
             
         }
@@ -72,7 +88,7 @@ namespace NewUppgift1AI
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
-            robot = new Robot(stateMachine, walls);
+            robot = new Robot(stateMachine, walls, peeList);
         }
 
         private void UpdateEntities(GameTime gameTime)
@@ -83,6 +99,35 @@ namespace NewUppgift1AI
         private void DrawEntities(SpriteBatch spriteBatch)
         {
             robot.Draw(spriteBatch);
+        }
+
+        private void UpdatePeeList()
+        {
+            foreach (Pee pee in peeList)
+            {
+                pee.Update();
+            }
+        }
+
+        private void DrawPeeList(SpriteBatch spriteBatch)
+        {
+            foreach (Pee pee in peeList)
+            {
+                pee.Draw(spriteBatch);
+            }
+        }
+
+        private void RandomPeeAdderPlaceHolder()
+        {
+            peeTimer = peeDefaultVal;
+
+            Random rand = new Random();
+
+            int vX = rand.Next(300, 1500);
+            int vY = rand.Next(300, 900);
+
+            peeList.Add(new Pee(new Vector2(vX, vY)));
+
         }
 
   

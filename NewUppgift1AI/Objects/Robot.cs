@@ -13,20 +13,27 @@ namespace NewUppgift1AI
     {
         public MoveState MoveState { get; private set; }
         public CollissionState CollissionState { get; private set; }
+        public ChaseState ChaseState { get; private set; }
+        public CleanState CleanState { get; private set; }
+
+        public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
 
         public List<Wall> walls;
+        public List<Pee> peeList;
 
-        public Robot(FiniteStateMachine stateMachine, List<Wall> walls)
+        public Robot(FiniteStateMachine stateMachine, List<Wall> walls, List<Pee> peeList)
         {
             texture = TextureManager.robotTex;
             position = new Vector2(700, 500);
 
             this.walls = walls;
+            this.peeList = peeList;
             this.stateMachine = stateMachine;
 
             MoveState = new MoveState(this, stateMachine);
             CollissionState = new CollissionState(this, stateMachine);
+            ChaseState = new ChaseState(this, stateMachine);
 
             stateMachine.Initialize(MoveState);
         }
@@ -53,6 +60,14 @@ namespace NewUppgift1AI
             else if (stateMachine.currentState == CollissionState)
             {
                 CollissionState.Update(gameTime);
+            }
+            else if (stateMachine.currentState == ChaseState)
+            {
+                ChaseState.Update(gameTime);
+            }
+            else if (stateMachine.currentState == CleanState)
+            {
+                CleanState.Update(gameTime);
             }
         }
     }
