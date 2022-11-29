@@ -72,7 +72,7 @@ namespace NewUppgift1AI
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
-            robot = new Robot(stateMachine);
+            robot = new Robot(stateMachine, walls);
         }
 
         private void UpdateEntities(GameTime gameTime)

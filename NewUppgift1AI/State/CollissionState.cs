@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,9 @@ namespace NewUppgift1AI
 {
     internal class CollissionState : State
     {
+        int timerDefault = 750;
+        int timer = 750;
+
         public CollissionState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
         {
 
@@ -16,17 +20,25 @@ namespace NewUppgift1AI
 
         public override void Enter()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("Enter Collission");
+            robot.ReverseDirection();
         }
 
         public override void Exit()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("Exit Collission");
+
+            timer = timerDefault;
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            timer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (timer <= 0)
+            {
+                stateMachine.ChangeState(robot.MoveState);
+            }
         }
     }
 }

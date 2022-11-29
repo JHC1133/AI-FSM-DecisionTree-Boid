@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,30 +18,63 @@ namespace NewUppgift1AI
         protected float velocity;
         protected Rectangle hitbox;
 
+        public Vector2 currentOrientation;
+        public Vector2 oldOrientation;
+
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
-
 
 
         public Vector2 RandomMovement()
         {
             Random random = new Random();
 
-            int outcome = random.Next(1, 4);
+            int outcome;
 
-            switch (outcome)
+
+            if (currentOrientation == Data.up || currentOrientation == Data.down)
             {
-                case 1:
-                    return Data.up;
-                case 2:
-                    return Data.down;
-                case 3:
-                    return Data.left;
-                case 4:
-                    return Data.right;
+                outcome = random.Next(1, 3);
+
+                switch (outcome)
+                {
+                    case 1:
+                        return Data.left;
+                    case 2:
+                        return Data.right;
+
+                }
+            }
+            else if (currentOrientation == Data.left || currentOrientation == Data.right)
+            {
+                outcome = random.Next(1, 3);
+
+                switch (outcome)
+                {
+                    case 1:
+                        return Data.up;
+                    case 2:
+                        return Data.down;
+
+                }
             }
 
+            Debug.WriteLine("You shouldnt have made it here");
             return Data.right;
+
+            //switch (outcome)
+            //{
+            //    case 1:
+            //        return Data.up;
+            //    case 2:
+            //        return Data.down;
+            //    case 3:
+            //        return Data.left;
+            //    case 4:
+            //        return Data.right;
+            //}
+
+            //return Data.right;
 
         }
 
@@ -74,6 +108,7 @@ namespace NewUppgift1AI
         {
             this.direction = direction;
             this.direction.Normalize();
+            currentOrientation = direction;
 
         }
 
@@ -86,6 +121,7 @@ namespace NewUppgift1AI
         {
             direction = targetDirection;
             this.direction.Normalize();
+            currentOrientation = direction;
         }
 
         /// <summary>
@@ -97,6 +133,15 @@ namespace NewUppgift1AI
         {
             direction = evadeDirection;
             this.direction.Normalize();
+            currentOrientation = direction;
+        }
+
+        public void ReverseDirection()
+        {
+            Vector2 reverseOrientation = currentOrientation *= -1;
+            oldOrientation = currentOrientation;
+            Debug.WriteLine(oldOrientation);
+            SetDirection(reverseOrientation);
         }
     }
 }

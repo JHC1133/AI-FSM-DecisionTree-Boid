@@ -13,11 +13,17 @@ namespace NewUppgift1AI
     {
         public MoveState MoveState { get; private set; }
         public CollissionState CollissionState { get; private set; }
+        public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
 
-        public Robot(FiniteStateMachine stateMachine)
+        public List<Wall> walls;
+
+        public Robot(FiniteStateMachine stateMachine, List<Wall> walls)
         {
             texture = TextureManager.robotTex;
             position = new Vector2(700, 500);
+
+            this.walls = walls;
+            this.stateMachine = stateMachine;
 
             MoveState = new MoveState(this, stateMachine);
             CollissionState = new CollissionState(this, stateMachine);
@@ -28,13 +34,26 @@ namespace NewUppgift1AI
         public override void Update(GameTime gameTime) 
         {
             position += direction * velocity;
-            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
+            RobotStateUpdate(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
+        }
+
+        private void RobotStateUpdate(GameTime gameTime)
+        {
+            if (stateMachine.currentState == MoveState)
+            {
+                MoveState.Update(gameTime);
+            }
+            else if (stateMachine.currentState == CollissionState)
+            {
+                CollissionState.Update(gameTime);
+            }
         }
     }
 }
