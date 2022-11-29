@@ -28,6 +28,8 @@ namespace NewUppgift1AI
         public override void Update(GameTime gameTime)
         {
             //Ex: If you would want to change texture for this state
+
+
         }
     }
 }
