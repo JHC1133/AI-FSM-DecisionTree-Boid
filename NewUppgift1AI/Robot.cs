@@ -18,7 +18,7 @@ namespace NewUppgift1AI
             position = new Vector2(700, 500);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime) 
         {
             position += direction * velocity;
             hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
