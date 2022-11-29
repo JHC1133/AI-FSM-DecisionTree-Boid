@@ -10,6 +10,8 @@ namespace NewUppgift1AI
 {
     abstract class Entity
     {
+        public FiniteStateMachine stateMachine;
+
         protected Texture2D texture;
         protected Vector2 direction, distance, position;
         protected float velocity;
@@ -18,6 +20,38 @@ namespace NewUppgift1AI
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
 
+
+
+        public Vector2 RandomMovement()
+        {
+            Random random = new Random();
+
+            int outcome = random.Next(1, 4);
+
+            switch (outcome)
+            {
+                case 1:
+                    return Data.up;
+                case 2:
+                    return Data.down;
+                case 3:
+                    return Data.left;
+                case 4:
+                    return Data.right;
+            }
+
+            return Data.right;
+
+        }
+
+        /// <summary>
+        /// Set velocity for Entity
+        /// </summary>
+        /// <param name="velocity"></param>
+        public virtual void SetVelocity(float velocity)
+        {
+            this.velocity = velocity;
+        }
 
         /// <summary>
         /// Get distance between v1 and v2

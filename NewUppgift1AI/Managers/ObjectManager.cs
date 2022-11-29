@@ -16,12 +16,12 @@ namespace NewUppgift1AI
 
         Robot robot;
 
-        public ObjectManager()
+        public ObjectManager(FiniteStateMachine stateMachine)
         {
             InitWalls();
             floor = new Interior(Vector2.Zero);
 
-            InitEntities();
+            InitEntities(stateMachine);
 
         }
         public void Update(GameTime gameTime)
@@ -70,9 +70,9 @@ namespace NewUppgift1AI
             rightSide.Draw(spriteBatch);
         }
 
-        private void InitEntities()
+        private void InitEntities(FiniteStateMachine stateMachine)
         {
-            robot = new Robot();
+            robot = new Robot(stateMachine);
         }
 
         private void UpdateEntities(GameTime gameTime)

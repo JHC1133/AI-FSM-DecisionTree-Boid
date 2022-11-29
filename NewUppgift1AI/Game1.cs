@@ -10,6 +10,8 @@ namespace NewUppgift1AI
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        FiniteStateMachine stateMachine;
+
         const int windowX = 2500, windowY = 1500;
         public static int WindowX => windowX;
         public static int WindowY => windowY;
@@ -35,8 +37,9 @@ namespace NewUppgift1AI
             graphics.ApplyChanges();
 
             TextureManager.LoadTex(Content);
+            stateMachine = new FiniteStateMachine();
 
-            objectManager = new ObjectManager();
+            objectManager = new ObjectManager(stateMachine);
 
             base.Initialize();
         }
