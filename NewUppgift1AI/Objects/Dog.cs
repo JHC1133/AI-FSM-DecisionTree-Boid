@@ -2,23 +2,32 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static NewUppgift1AI.DecisionTree;
 
 namespace NewUppgift1AI
 {
     internal class Dog : Entity
     {
         DecisionTree decisionTree;
+        BinaryTree binaryTree;
 
         int thirstMeter;
         int peeTimer;
+        int moveDirectionTimer;
 
         bool isDogThirsty;
         bool isThereWater;
         bool isThePeeTimerZero;
+
+        bool drinkMode;
+        bool peeMode;
+        bool rageMode;
+        bool moveMode;
 
 
         public Vector2 Position { get => position; set => position = value; }
@@ -30,12 +39,27 @@ namespace NewUppgift1AI
             position = new Vector2(500, 500);
 
             decisionTree = new DecisionTree();
+            binaryTree = new BinaryTree();
+            GenerateDecisionTree(binaryTree);
         }
 
         public override void Update(GameTime gameTime)
         {
             Position += direction * velocity;
             Hitbox = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+
+            if (moveMode)
+            {
+                Random random = new Random();
+
+                moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
+
+                if (moveDirectionTimer <= 0) 
+                {
+                    SetDirection(RandomMovement());
+                    moveDirectionTimer = random.Next(1000, 7000);
+                }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -44,17 +68,23 @@ namespace NewUppgift1AI
 
         }
 
-        private void GenerateDecisionTree(DecisionTree decisionTree)
+        private void GenerateDecisionTree(BinaryTree binaryTree)
         {
-            decisionTree = new BinaryTree()
+            binaryTree.SetRoot(1, ThirstMeterCheck());
+            binaryTree.AddTrueNode(1, 2, WaterLevelCheck());
+            binaryTree.AddFalseNode(1, 3, PeeTimerCheck());
+            binaryTree.AddTrueNode(2, 4, ActivateDrink());
+            binaryTree.AddFalseNode(2, 5, ActivateRage());
+            binaryTree.AddTrueNode(3, 6, ActivatePee());
+            binaryTree.AddFalseNode(3, 7, ActivateMove());
         }
 
-        public bool WaterLevelCheck()
+        private bool WaterLevelCheck()
         {
             return false;
         }
 
-        public bool ThirstMeterCheck()
+        private bool ThirstMeterCheck()
         {
             if (thirstMeter <= 0)
             {
@@ -63,5 +93,40 @@ namespace NewUppgift1AI
 
             return false;
         }
+
+        private bool PeeTimerCheck()
+        {
+            if (peeTimer <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool ActivateDrink()
+        {
+            drinkMode = true;
+            return false; //Vet inte vad detta ger för effekt
+        }
+
+        private bool ActivatePee()
+        {
+            peeMode = true;
+            return false;
+        }
+
+        private bool ActivateRage()
+        {
+            rageMode = true;
+            return false;
+        }
+
+        private bool ActivateMove()
+        {
+            moveMode = true;
+            return false;
+        }
+
+
     }
 }

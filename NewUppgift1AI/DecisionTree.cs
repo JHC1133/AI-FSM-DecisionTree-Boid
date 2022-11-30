@@ -18,6 +18,11 @@ namespace NewUppgift1AI
 
             public Dog dog;
 
+            public BinaryTree()
+            {
+
+            }
+
             public BinaryTree(int newID, bool newEval)
             {
                 ID = newID;
