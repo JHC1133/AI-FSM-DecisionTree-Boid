@@ -10,6 +10,9 @@ namespace NewUppgift1AI
 {
     internal class CleanState : State
     {
+        int directionCalculationTimer = 1000;
+        int dirCalcTimerDefault = 1000;
+
         public CleanState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
         {
 
@@ -24,6 +27,8 @@ namespace NewUppgift1AI
         public override void Exit()
         {
             Debug.WriteLine("EXIT CLEAN");
+
+            directionCalculationTimer = dirCalcTimerDefault;
         }
 
         public override void Update(GameTime gameTime)

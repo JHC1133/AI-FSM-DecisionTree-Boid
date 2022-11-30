@@ -13,6 +13,9 @@ namespace NewUppgift1AI
         int timerDefault = 750;
         int timer = 750;
 
+        int directionCalcDefault = 1000;
+        int directionCalculationTimer = 1000;
+
         public CollissionState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
         {
 
@@ -29,6 +32,7 @@ namespace NewUppgift1AI
             Debug.WriteLine("Exit Collission");
 
             timer = timerDefault;
+            directionCalculationTimer = directionCalcDefault;
         }
 
         public override void Update(GameTime gameTime)
@@ -37,7 +41,14 @@ namespace NewUppgift1AI
 
             if (timer <= 0)
             {
-                stateMachine.ChangeState(robot.MoveState);
+                robot.SetVelocity(Data.zero);
+
+                directionCalculationTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                if (directionCalculationTimer <= 0)
+                {
+                    stateMachine.ChangeState(robot.MoveState);
+                }
             }
         }
     }
