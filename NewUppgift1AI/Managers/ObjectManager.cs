@@ -27,6 +27,7 @@ namespace NewUppgift1AI
         {
             InitStaticObjects();
             floor = new Interior(Vector2.Zero);
+            waterBowl = new WaterBowl();
             peeList = new List<Pee>();
 
             InitEntities(stateMachine);
@@ -34,9 +35,10 @@ namespace NewUppgift1AI
         }
         public void Update(GameTime gameTime)
         {
-            UpdateStaticObjects();
+            UpdateWalls();
             UpdateEntities(gameTime);
             UpdatePeeList();
+            waterBowl.Update(gameTime);
 
             peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -72,12 +74,14 @@ namespace NewUppgift1AI
             };
         }
 
-        private void UpdateStaticObjects()
+        private void UpdateWalls()
         {
             top.Update();
             bottom.Update();
             leftSide.Update();
             rightSide.Update();
+
+            
         }
 
         private void DrawStaticObjects(SpriteBatch spriteBatch)
@@ -88,6 +92,7 @@ namespace NewUppgift1AI
             rightSide.Draw(spriteBatch);
 
             floor.Draw(spriteBatch);
+            waterBowl.Draw(spriteBatch);
         }
 
         private void InitEntities(FiniteStateMachine stateMachine)
