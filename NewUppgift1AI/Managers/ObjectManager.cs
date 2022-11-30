@@ -86,12 +86,13 @@ namespace NewUppgift1AI
 
         private void DrawStaticObjects(SpriteBatch spriteBatch)
         {
+            floor.Draw(spriteBatch);
+
             top.Draw(spriteBatch);
             bottom.Draw(spriteBatch);
             leftSide.Draw(spriteBatch);
             rightSide.Draw(spriteBatch);
-
-            floor.Draw(spriteBatch);
+           
             waterBowl.Draw(spriteBatch);
         }
 
