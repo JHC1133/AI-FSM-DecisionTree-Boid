@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,15 +51,29 @@ namespace NewUppgift1AI
 
             if (moveMode)
             {
-                Random random = new Random();
+                Debug.WriteLine("Dog is in MOVEmode");
 
-                moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
+                //Random random = new Random();
 
-                if (moveDirectionTimer <= 0) 
-                {
-                    SetDirection(RandomMovement());
-                    moveDirectionTimer = random.Next(1000, 7000);
-                }
+                //moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
+
+                //if (moveDirectionTimer <= 0) 
+                //{
+                //    SetDirection(RandomMovement());
+                //    moveDirectionTimer = random.Next(1000, 7000);
+                //}
+            }
+            else if (peeMode)
+            {
+                Debug.WriteLine("Dog is in PEEmode");
+            }
+            else if (rageMode)
+            {
+                Debug.WriteLine("Dog is in RAGEmode");
+            }
+            else if (drinkMode)
+            {
+                Debug.WriteLine("Dog is in DRINKmode");
             }
         }
 
