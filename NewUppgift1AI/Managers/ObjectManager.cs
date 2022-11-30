@@ -17,13 +17,15 @@ namespace NewUppgift1AI
         Interior floor;
 
         Robot robot;
+        Dog dog;
+        WaterBowl waterBowl;
 
         int peeDefaultVal = 7000;
         int peeTimer = 7000;
 
         public ObjectManager(FiniteStateMachine stateMachine)
         {
-            InitWalls();
+            InitStaticObjects();
             floor = new Interior(Vector2.Zero);
             peeList = new List<Pee>();
 
@@ -32,7 +34,7 @@ namespace NewUppgift1AI
         }
         public void Update(GameTime gameTime)
         {
-            UpdateWalls();
+            UpdateStaticObjects();
             UpdateEntities(gameTime);
             UpdatePeeList();
 
@@ -46,15 +48,15 @@ namespace NewUppgift1AI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            floor.Draw(spriteBatch);
-            DrawWalls(spriteBatch);
+           
+            DrawStaticObjects(spriteBatch);
 
             DrawPeeList(spriteBatch);
             DrawEntities(spriteBatch);
             
         }
 
-        private void InitWalls()
+        private void InitStaticObjects()
         {
             int wallWidth = 116;
 
@@ -70,7 +72,7 @@ namespace NewUppgift1AI
             };
         }
 
-        private void UpdateWalls()
+        private void UpdateStaticObjects()
         {
             top.Update();
             bottom.Update();
@@ -78,27 +80,32 @@ namespace NewUppgift1AI
             rightSide.Update();
         }
 
-        private void DrawWalls(SpriteBatch spriteBatch)
+        private void DrawStaticObjects(SpriteBatch spriteBatch)
         {
             top.Draw(spriteBatch);
             bottom.Draw(spriteBatch);
             leftSide.Draw(spriteBatch);
             rightSide.Draw(spriteBatch);
+
+            floor.Draw(spriteBatch);
         }
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
             robot = new Robot(stateMachine, walls, peeList);
+            dog = new Dog();
         }
 
         private void UpdateEntities(GameTime gameTime)
         {
             robot.Update(gameTime);
+            dog.Update(gameTime);
         }
 
         private void DrawEntities(SpriteBatch spriteBatch)
         {
             robot.Draw(spriteBatch);
+            dog.Draw(spriteBatch);
         }
 
         private void UpdatePeeList()
