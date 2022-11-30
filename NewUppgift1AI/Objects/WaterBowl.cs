@@ -11,7 +11,7 @@ namespace NewUppgift1AI
 {
     internal class WaterBowl : NonMovingObject
     {
-        int timerDefault = 3000; //10 seconds
+        int timerDefault = 3000; //3 seconds
         int waterBowlTimer;
 
         bool waterAvailable;

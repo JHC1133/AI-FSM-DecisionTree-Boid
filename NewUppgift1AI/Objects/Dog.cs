@@ -42,6 +42,8 @@ namespace NewUppgift1AI
             decisionTree = new DecisionTree();
             binaryTree = new BinaryTree();
             GenerateDecisionTree(binaryTree);
+
+            moveMode = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -49,19 +51,22 @@ namespace NewUppgift1AI
             Position += direction * velocity;
             Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
+            binaryTree.ParseTree();
+
             if (moveMode)
             {
                 Debug.WriteLine("Dog is in MOVEmode");
+                SetVelocity(Data.dogDefaultVel);
+                //SetDirection(RandomMovement());
+                Random random = new Random();
 
-                //Random random = new Random();
+                moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
 
-                //moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
-
-                //if (moveDirectionTimer <= 0) 
-                //{
-                //    SetDirection(RandomMovement());
-                //    moveDirectionTimer = random.Next(1000, 7000);
-                //}
+                if (moveDirectionTimer <= 0)
+                {
+                    SetDirection(RandomMovement());
+                    moveDirectionTimer = random.Next(1000, 7000);
+                }
             }
             else if (peeMode)
             {
@@ -105,7 +110,6 @@ namespace NewUppgift1AI
             {
                 return true;
             }
-
             return false;
         }
 
@@ -141,7 +145,5 @@ namespace NewUppgift1AI
             moveMode = true;
             return false;
         }
-
-
     }
 }
