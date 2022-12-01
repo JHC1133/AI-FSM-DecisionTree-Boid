@@ -49,6 +49,7 @@ namespace NewUppgift1AI
             peeTimer = 3000;
 
             //moveMode = true;
+            peeMode = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -72,7 +73,7 @@ namespace NewUppgift1AI
 
                 if (moveDirectionTimer <= 0)
                 {
-                    SetDirection(RandomMovement());
+                    //SetDirection(RandomMovement());
                     moveDirectionTimer = random.Next(1000, 3000);
                 }
             }
@@ -99,12 +100,12 @@ namespace NewUppgift1AI
         private void GenerateDecisionTree(BinaryTree binaryTree)
         {
             binaryTree.SetRoot(1, ThirstMeterCheck());
-            binaryTree.AddTrueNode(1, 2, WaterLevelCheck(), placeHolderBool);
-            binaryTree.AddFalseNode(1, 3, PeeTimerCheck(), placeHolderBool);
-            binaryTree.AddTrueNode(2, 4, ActivateDrink(), drinkMode);
-            binaryTree.AddFalseNode(2, 5, ActivateRage(), rageMode);
-            binaryTree.AddTrueNode(3, 6, ActivatePee(), peeMode);
-            binaryTree.AddFalseNode(3, 7, ActivateMove(), moveMode);
+            binaryTree.AddTrueNode(1, 2, WaterLevelCheck());
+            binaryTree.AddFalseNode(1, 3, PeeTimerCheck());
+            binaryTree.AddTrueNode(2, 4, ActivateDrink());
+            binaryTree.AddFalseNode(2, 5, ActivateRage());
+            binaryTree.AddTrueNode(3, 6, ActivatePee());
+            binaryTree.AddFalseNode(3, 7, ActivateMove());
         }
 
         private bool WaterLevelCheck()
@@ -150,7 +151,7 @@ namespace NewUppgift1AI
 
         private bool ActivateMove()
         {
-            //moveMode = true;
+            moveMode = true;
             return false;
         }
     }
