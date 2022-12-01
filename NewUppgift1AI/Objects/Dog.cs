@@ -54,8 +54,9 @@ namespace NewUppgift1AI
 
             newDecisionTree = new DT();
 
-            isThereWater = true;
-            isDogThirsty = true;
+            isThereWater = false;
+            isDogThirsty = false;
+            isThePeeTimerZero = false;
 
             //moveMode = true;
         }
@@ -90,25 +91,25 @@ namespace NewUppgift1AI
                     moveDirectionTimer = random.Next(1000, 3000);
                 }
             }
-            //else if (peeMode)
-            //{
+            else if (peeMode)
+            {
 
-            //    Debug.WriteLine("Dog is in PEEmode");
-            //    SetVelocity(Data.zero);
+                Debug.WriteLine("Dog is in PEEmode");
+                SetVelocity(Data.zero);
 
-            //    int peeDelay = 1000;
-            //    peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                int peeDelay = 1000;
+                peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            //    if (peeDelay <= 0)
-            //    {
-            //        peeMode = false;                 
-            //    }
+                if (peeDelay <= 0)
+                {
+                    peeMode = false;
+                }
 
-            //}
-            //else if (rageMode)
-            //{
-            //    Debug.WriteLine("Dog is in RAGEmode");
-            //}
+            }
+            else if (rageMode)
+            {
+                Debug.WriteLine("Dog is in RAGEmode");
+            }
             else if (drinkMode)
             {
                 Debug.WriteLine("Dog is in DRINKmode");
