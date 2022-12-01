@@ -30,6 +30,8 @@ namespace NewUppgift1AI
         bool rageMode;
         bool moveMode;
 
+        bool placeHolderBool;
+
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
@@ -43,6 +45,9 @@ namespace NewUppgift1AI
             binaryTree = new BinaryTree();
             GenerateDecisionTree(binaryTree);
 
+            thirstMeter = 5000;
+            peeTimer = 3000;
+
             moveMode = true;
         }
 
@@ -53,6 +58,9 @@ namespace NewUppgift1AI
 
             binaryTree.ParseTree();
 
+            //thirstMeter -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
             if (moveMode)
             {
                 Debug.WriteLine("Dog is in MOVEmode");
@@ -60,12 +68,12 @@ namespace NewUppgift1AI
                 //SetDirection(RandomMovement());
                 Random random = new Random();
 
-                moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
+                moveDirectionTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (moveDirectionTimer <= 0)
                 {
                     SetDirection(RandomMovement());
-                    moveDirectionTimer = random.Next(1000, 7000);
+                    moveDirectionTimer = random.Next(1000, 3000);
                 }
             }
             else if (peeMode)
@@ -91,12 +99,12 @@ namespace NewUppgift1AI
         private void GenerateDecisionTree(BinaryTree binaryTree)
         {
             binaryTree.SetRoot(1, ThirstMeterCheck());
-            binaryTree.AddTrueNode(1, 2, WaterLevelCheck());
-            binaryTree.AddFalseNode(1, 3, PeeTimerCheck());
-            binaryTree.AddTrueNode(2, 4, ActivateDrink());
-            binaryTree.AddFalseNode(2, 5, ActivateRage());
-            binaryTree.AddTrueNode(3, 6, ActivatePee());
-            binaryTree.AddFalseNode(3, 7, ActivateMove());
+            binaryTree.AddTrueNode(1, 2, WaterLevelCheck(), placeHolderBool);
+            binaryTree.AddFalseNode(1, 3, PeeTimerCheck(), placeHolderBool);
+            binaryTree.AddTrueNode(2, 4, ActivateDrink(), drinkMode);
+            binaryTree.AddFalseNode(2, 5, ActivateRage(), rageMode);
+            binaryTree.AddTrueNode(3, 6, ActivatePee(), peeMode);
+            binaryTree.AddFalseNode(3, 7, ActivateMove(), moveMode);
         }
 
         private bool WaterLevelCheck()

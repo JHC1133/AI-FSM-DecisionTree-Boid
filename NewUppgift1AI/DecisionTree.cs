@@ -15,6 +15,8 @@ namespace NewUppgift1AI
             bool EvalMethod;
             public BinaryTree trueBranch;
             public BinaryTree falseBranch;
+            bool activateMode;
+            bool drinkMode, rageMode, moveMode, peeMode;
 
             public Dog dog;
 
@@ -36,14 +38,14 @@ namespace NewUppgift1AI
                 root = new BinaryTree(newID, newEval);
             }
 
-            public void AddTrueNode(int existingNodeID, int newNodeID, bool newQuestAns)
+            public void AddTrueNode(int existingNodeID, int newNodeID, bool newQuestAns, bool activateMode)
             {
                 if (root == null)
                 {
                     return;
                 }
 
-                if (ParseTreeAndAddTrueNode(root, existingNodeID, newNodeID, newQuestAns))
+                if (ParseTreeAndAddTrueNode(root, existingNodeID, newNodeID, newQuestAns, activateMode))
                 {
                     //Added
                 }
@@ -53,7 +55,7 @@ namespace NewUppgift1AI
                 }
             }
 
-            bool ParseTreeAndAddTrueNode(BinaryTree currentNode, int existingNodeID, int newNodeID, bool newQuestAns)
+            bool ParseTreeAndAddTrueNode(BinaryTree currentNode, int existingNodeID, int newNodeID, bool newQuestAns, bool activateMode)
             {
                 if (currentNode.ID == existingNodeID)
                 {
@@ -72,7 +74,7 @@ namespace NewUppgift1AI
                 {
                     if (currentNode.trueBranch != null)
                     {
-                        if (ParseTreeAndAddTrueNode(currentNode.trueBranch, existingNodeID, newNodeID, newQuestAns))
+                        if (ParseTreeAndAddTrueNode(currentNode.trueBranch, existingNodeID, newNodeID, newQuestAns, activateMode))
                         {
                             return true;
                         }
@@ -80,7 +82,7 @@ namespace NewUppgift1AI
                         {
                             if (currentNode.falseBranch != null)
                             {
-                                return (ParseTreeAndAddTrueNode(currentNode.falseBranch, existingNodeID, newNodeID, newQuestAns));
+                                return (ParseTreeAndAddTrueNode(currentNode.falseBranch, existingNodeID, newNodeID, newQuestAns, activateMode));
                             }
                             else
                             {
@@ -92,14 +94,14 @@ namespace NewUppgift1AI
                 }
             }
 
-            public void AddFalseNode(int existingNodeID, int newNodeID, bool newQuestAns)
+            public void AddFalseNode(int existingNodeID, int newNodeID, bool newQuestAns, bool activateMode)
             {
                 if (root == null)
                 {
                     return;
                 }
 
-                if (ParseTreeAndAddFalseNode(root, existingNodeID, newNodeID, newQuestAns))
+                if (ParseTreeAndAddFalseNode(root, existingNodeID, newNodeID, newQuestAns, activateMode))
                 {
                     //Added
                 }
@@ -109,7 +111,7 @@ namespace NewUppgift1AI
                 }
             }
 
-            bool ParseTreeAndAddFalseNode(BinaryTree currentNode, int existingNodeID, int newNodeID, bool newQuestAns)
+            bool ParseTreeAndAddFalseNode(BinaryTree currentNode, int existingNodeID, int newNodeID, bool newQuestAns, bool activateMode)
             {
                 if (currentNode.ID == existingNodeID)
                 {
@@ -128,7 +130,7 @@ namespace NewUppgift1AI
                 {
                     if (currentNode.trueBranch != null)
                     {
-                        if (ParseTreeAndAddFalseNode(currentNode.trueBranch, existingNodeID, newNodeID, newQuestAns))
+                        if (ParseTreeAndAddFalseNode(currentNode.trueBranch, existingNodeID, newNodeID, newQuestAns, activateMode))
                         {
                             return true;
                         }
@@ -136,7 +138,7 @@ namespace NewUppgift1AI
                         {
                             if (currentNode.falseBranch != null)
                             {
-                                return ParseTreeAndAddFalseNode(currentNode.falseBranch, existingNodeID, newNodeID, newQuestAns);
+                                return ParseTreeAndAddFalseNode(currentNode.falseBranch, existingNodeID, newNodeID, newQuestAns, activateMode);
                             }
                             else return false;
                         }
@@ -171,12 +173,16 @@ namespace NewUppgift1AI
                     if (currentNode.falseBranch == null)
                     {
                         Debug.WriteLine("true and false branch was null");
-                        currentNode.EvalMethod = true;
+                        currentNode.activateMode = true;
+                        Debug.WriteLine(currentNode.activateMode.ToString() + " " + currentNode.activateMode);
                     }
                     return;
                 }
                 if (currentNode.falseBranch == null)
                 {
+                    Debug.WriteLine("true and false branch was null");
+                    currentNode.activateMode = true;
+                    Debug.WriteLine(currentNode.activateMode.ToString() + " " + currentNode.activateMode);
                     return;
                 }
                 Eval(currentNode);
