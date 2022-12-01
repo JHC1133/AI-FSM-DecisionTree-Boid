@@ -16,6 +16,7 @@ namespace NewUppgift1AI
     {
         DecisionTree decisionTree;
         BinaryTree binaryTree;
+        DT newDecisionTree;
 
         int thirstMeter;
         int peeTimer;
@@ -24,14 +25,14 @@ namespace NewUppgift1AI
         int peeTimerDefault = 3000;
         int thirstMeterDefault = 3000;
 
-        bool isDogThirsty;
-        bool isThereWater;
-        bool isThePeeTimerZero;
+        public bool isDogThirsty;
+        public bool isThereWater;
+        public bool isThePeeTimerZero;
 
-        bool drinkMode;
-        bool peeMode;
-        bool rageMode;
-        bool moveMode;
+        public bool drinkMode;
+        public bool peeMode;
+        public bool rageMode;
+        public bool moveMode;
 
         bool placeHolderBool;
 
@@ -51,8 +52,10 @@ namespace NewUppgift1AI
             thirstMeter = thirstMeterDefault;
             peeTimer = peeTimerDefault;
 
-            isThereWater = true;
-            isDogThirsty = true;
+            newDecisionTree = new DT();
+
+            //isThereWater = true;
+            //isDogThirsty = true;
 
             //moveMode = true;
         }
@@ -65,12 +68,14 @@ namespace NewUppgift1AI
             thirstMeter -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            DogModeCheck();
-            PeeTimerCheck();
+            newDecisionTree.root.Evaluate(this);
 
-            //binaryTree.ParseTree();
+            //DogModeCheck();
+            //PeeTimerCheck();
 
- 
+            ////binaryTree.ParseTree();
+
+
             if (moveMode)
             {
                 Random random = new Random();
@@ -80,37 +85,37 @@ namespace NewUppgift1AI
                 moveDirectionTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (moveDirectionTimer <= 0)
-                {                  
+                {
                     SetDirection(RandomMovement());
                     moveDirectionTimer = random.Next(1000, 3000);
                 }
             }
-            else if (peeMode)
-            {
+            //else if (peeMode)
+            //{
 
-                Debug.WriteLine("Dog is in PEEmode");
-                SetVelocity(Data.zero);
+            //    Debug.WriteLine("Dog is in PEEmode");
+            //    SetVelocity(Data.zero);
 
-                int peeDelay = 1000;
-                peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //    int peeDelay = 1000;
+            //    peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                if (peeDelay <= 0)
-                {
-                    peeMode = false;                 
-                }
+            //    if (peeDelay <= 0)
+            //    {
+            //        peeMode = false;                 
+            //    }
 
-            }
-            else if (rageMode)
-            {
-                Debug.WriteLine("Dog is in RAGEmode");
-            }
-            else if (drinkMode)
-            {
-                Debug.WriteLine("Dog is in DRINKmode");
-                peeTimer = peeTimerDefault;
-                isDogThirsty = false;
-            }
- 
+            //}
+            //else if (rageMode)
+            //{
+            //    Debug.WriteLine("Dog is in RAGEmode");
+            //}
+            //else if (drinkMode)
+            //{
+            //    Debug.WriteLine("Dog is in DRINKmode");
+            //    peeTimer = peeTimerDefault;
+            //    isDogThirsty = false;
+            //}
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
