@@ -172,7 +172,8 @@ namespace NewUppgift1AI
                 {
                     if (currentNode.falseBranch == null)
                     {
-                        Debug.WriteLine("true and false branch was null");
+                        Debug.WriteLine(currentNode.ID + "true and false branch was null");
+                        currentNode.EvalMethod = true;
                         //currentNode.activateMode = true;
                         //Debug.WriteLine(currentNode.activateMode.ToString() + " " + currentNode.activateMode);
                     }
@@ -180,8 +181,8 @@ namespace NewUppgift1AI
                 }
                 if (currentNode.falseBranch == null)
                 {
-                    Debug.WriteLine("true and false branch was null");
-                    //currentNode.activateMode = true;
+                    Debug.WriteLine(currentNode.ID + "false branch was null");
+                    currentNode.EvalMethod = true;
                     //Debug.WriteLine(currentNode.activateMode.ToString() + " " + currentNode.activateMode);
                     return;
                 }

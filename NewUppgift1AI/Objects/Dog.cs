@@ -21,6 +21,9 @@ namespace NewUppgift1AI
         int peeTimer;
         int moveDirectionTimer;
 
+        int peeTimerDefault = 3000;
+        int thirstMeterDefault = 3000;
+
         bool isDogThirsty;
         bool isThereWater;
         bool isThePeeTimerZero;
@@ -43,12 +46,15 @@ namespace NewUppgift1AI
 
             decisionTree = new DecisionTree();
             binaryTree = new BinaryTree();
-            GenerateDecisionTree(binaryTree);
+            //GenerateDecisionTree(binaryTree);
 
-            thirstMeter = 5000;
-            peeTimer = 3000;
+            thirstMeter = thirstMeterDefault;
+            peeTimer = peeTimerDefault;
 
-            moveMode = true;
+            isThereWater = true;
+            isDogThirsty = true;
+
+            //moveMode = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -56,29 +62,43 @@ namespace NewUppgift1AI
             Position += direction * velocity;
             Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
-            binaryTree.ParseTree();
-
-            //thirstMeter -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            thirstMeter -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
+            DogModeCheck();
+            PeeTimerCheck();
+
+            //binaryTree.ParseTree();
+
+ 
             if (moveMode)
             {
+                Random random = new Random();
                 Debug.WriteLine("Dog is in MOVEmode");
                 SetVelocity(Data.dogDefaultVel);
-                //SetDirection(RandomMovement());
-                Random random = new Random();
 
                 moveDirectionTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (moveDirectionTimer <= 0)
-                {
-                    //SetDirection(RandomMovement());
+                {                  
+                    SetDirection(RandomMovement());
                     moveDirectionTimer = random.Next(1000, 3000);
                 }
             }
             else if (peeMode)
             {
+
                 Debug.WriteLine("Dog is in PEEmode");
+                SetVelocity(Data.zero);
+
+                int peeDelay = 1000;
+                peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                if (peeDelay <= 0)
+                {
+                    peeMode = false;                 
+                }
+
             }
             else if (rageMode)
             {
@@ -87,24 +107,53 @@ namespace NewUppgift1AI
             else if (drinkMode)
             {
                 Debug.WriteLine("Dog is in DRINKmode");
+                peeTimer = peeTimerDefault;
+                isDogThirsty = false;
             }
+ 
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);
+        }
 
+        private void DogModeCheck()
+        {
+            if (isDogThirsty)
+            {
+                if (isThereWater)
+                {
+                    drinkMode = true;                  
+                }
+                else
+                {
+                    rageMode = true;
+                }
+            }
+            else
+            {
+                if (isThePeeTimerZero)
+                {
+                    moveMode = false;
+                    peeMode = true;
+                }
+                else
+                {
+                    moveMode = true;
+                }
+            }
         }
 
         private void GenerateDecisionTree(BinaryTree binaryTree)
         {
-            binaryTree.SetRoot(1, ThirstMeterCheck());
-            binaryTree.AddTrueNode(1, 2, WaterLevelCheck());
-            binaryTree.AddFalseNode(1, 3, PeeTimerCheck());
-            binaryTree.AddTrueNode(2, 4, ActivateDrink());
-            binaryTree.AddFalseNode(2, 5, ActivateRage());
-            binaryTree.AddTrueNode(3, 6, ActivatePee());
-            binaryTree.AddFalseNode(3, 7, ActivateMove());
+            binaryTree.SetRoot(1, isDogThirsty);
+            binaryTree.AddTrueNode(1, 2, isThereWater);
+            binaryTree.AddFalseNode(1, 3, isThePeeTimerZero);
+            binaryTree.AddTrueNode(2, 4, drinkMode);
+            binaryTree.AddFalseNode(2, 5, rageMode);
+            binaryTree.AddTrueNode(3, 6, peeMode);
+            binaryTree.AddFalseNode(3, 7, moveMode);
         }
 
         private bool WaterLevelCheck()
@@ -116,18 +165,17 @@ namespace NewUppgift1AI
         {
             if (thirstMeter <= 0)
             {
-                return true;
+                return drinkMode = true;
             }
             return false;
         }
 
-        private bool PeeTimerCheck()
+        private void PeeTimerCheck()
         {
             if (peeTimer <= 0)
             {
-                return true;
+                isThePeeTimerZero = true;
             }
-            return false;
         }
 
         private bool ActivateDrink()

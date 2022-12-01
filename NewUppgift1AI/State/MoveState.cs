@@ -34,16 +34,6 @@ namespace NewUppgift1AI
 
         public override void Update(GameTime gameTime)
         {
-            //COMMENTED CODE BELOW IS DOG MOVE PATTERN TEST
-            //Random random = new Random();
-
-            //moveDirectionTimer -= (int)gameTime.TotalGameTime.TotalMilliseconds;
-
-            //if (moveDirectionTimer <= 0)
-            //{
-            //    robot.SetDirection(robot.RandomMovement());
-            //    moveDirectionTimer = random.Next(12000, 16000);
-            //}
 
             if (CheckRobotPeeDistance(robot.peeList))
             {
