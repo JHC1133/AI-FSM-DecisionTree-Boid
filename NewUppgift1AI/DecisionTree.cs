@@ -171,6 +171,7 @@ namespace NewUppgift1AI
                     if (currentNode.falseBranch == null)
                     {
                         Debug.WriteLine("true and false branch was null");
+                        currentNode.EvalMethod = true;
                     }
                     return;
                 }
