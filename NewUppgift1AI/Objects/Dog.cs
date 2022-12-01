@@ -54,8 +54,8 @@ namespace NewUppgift1AI
 
             newDecisionTree = new DT();
 
-            //isThereWater = true;
-            //isDogThirsty = true;
+            isThereWater = true;
+            isDogThirsty = true;
 
             //moveMode = true;
         }
@@ -109,12 +109,12 @@ namespace NewUppgift1AI
             //{
             //    Debug.WriteLine("Dog is in RAGEmode");
             //}
-            //else if (drinkMode)
-            //{
-            //    Debug.WriteLine("Dog is in DRINKmode");
-            //    peeTimer = peeTimerDefault;
-            //    isDogThirsty = false;
-            //}
+            else if (drinkMode)
+            {
+                Debug.WriteLine("Dog is in DRINKmode");
+                peeTimer = peeTimerDefault;
+                
+            }
 
         }
 

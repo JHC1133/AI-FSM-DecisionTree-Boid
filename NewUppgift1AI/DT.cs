@@ -59,7 +59,7 @@ namespace NewUppgift1AI
         {
             var moveModeBranch = new DecisionQuery
             {               
-                Test = (dog) => dog.moveMode = false,
+                Test = (dog) => dog.moveMode = true,
                 Positive = new DecisionResult { Result = true },
                 Negative = new DecisionResult { Result = false }
             };
