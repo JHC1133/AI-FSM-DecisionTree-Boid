@@ -48,8 +48,7 @@ namespace NewUppgift1AI
             thirstMeter = 5000;
             peeTimer = 3000;
 
-            //moveMode = true;
-            peeMode = true;
+            moveMode = true;
         }
 
         public override void Update(GameTime gameTime)
