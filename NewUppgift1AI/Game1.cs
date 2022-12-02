@@ -11,14 +11,13 @@ namespace NewUppgift1AI
         private SpriteBatch spriteBatch;
 
         FiniteStateMachine stateMachine;
+        ObjectManager objectManager;
 
         const int windowX = 2500, windowY = 1500;
         public static int WindowX => windowX;
         public static int WindowY => windowY;
 
         Rectangle screenRect;
-
-        ObjectManager objectManager;
 
         public Game1()
         {
@@ -38,7 +37,6 @@ namespace NewUppgift1AI
 
             TextureManager.LoadTex(Content);
             stateMachine = new FiniteStateMachine();
-
             objectManager = new ObjectManager(stateMachine);
 
             base.Initialize();
@@ -57,6 +55,7 @@ namespace NewUppgift1AI
                 Exit();
 
             objectManager.Update(gameTime);
+            InputManager.Update();
 
             base.Update(gameTime);
         }

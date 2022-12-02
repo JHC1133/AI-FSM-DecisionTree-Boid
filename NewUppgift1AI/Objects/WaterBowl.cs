@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.VisualBasic.Devices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,9 @@ namespace NewUppgift1AI
         int timerDefault = 3000; //3 seconds
         int waterBowlTimer;
 
-        bool waterAvailable;
+        public static bool waterAvailable;
+
+        
 
         public WaterBowl() 
         {
@@ -22,7 +26,9 @@ namespace NewUppgift1AI
             position = new Vector2(Game1.WindowX - texture.Width * 2, Game1.WindowY / 2 - texture.Height / 2);
 
             waterBowlTimer = timerDefault;
-            waterAvailable = true;
+            waterAvailable = false;
+
+           
         }
 
         public void Update(GameTime gameTime)
@@ -31,10 +37,18 @@ namespace NewUppgift1AI
 
             waterBowlTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if (waterBowlTimer <= 0)
+            if (hitbox.Contains(InputManager.MyMouseState.mouseState.Position))
             {
-                waterAvailable = false;
+                if (InputManager.SingleLeftClick())
+                {
+                    waterAvailable = true;
+                }
             }
+
+            //if (waterBowlTimer <= 0)
+            //{
+            //    waterAvailable = false;
+            //}
 
             WaterTextureChanger();
         }
