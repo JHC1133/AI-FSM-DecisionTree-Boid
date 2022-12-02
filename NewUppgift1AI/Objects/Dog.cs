@@ -111,14 +111,15 @@ namespace NewUppgift1AI
                 Debug.WriteLine("Dog is in PEEmode");
                 SetVelocity(Data.zero);
 
-                peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;            
 
                 if (peeDelay <= 0)
                 {
                     objectManager.peeList.Add(new Pee(Position));
                     hasDrunk = false;
                     hasPeed = true;
-                    peeTimer = peeTimerDefault; //Breaks loop
+                    peeTimer = peeTimerDefault;
+                    isPeeTimerZero = false; //Breaks loop
                 }
 
             }
@@ -147,6 +148,7 @@ namespace NewUppgift1AI
             
             hasDrunk = true;
             peeDelay = peeDelayDefault;
+            thirstTimer = thirstTimerDefault;
 
             //isThereWater = false;
             isDogThirsty = false; //Breaks loop
@@ -201,7 +203,6 @@ namespace NewUppgift1AI
 
         public void CheckWallCollision()
         {
-
             foreach (Wall wall in objectManager.walls)
             {
                 if (Hitbox.Intersects(wall.Hitbox))

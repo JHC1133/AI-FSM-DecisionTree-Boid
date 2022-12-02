@@ -45,13 +45,6 @@ namespace NewUppgift1AI
                 stateMachine.ChangeState(robot.objectManager.CollissionState);
             }
 
-            foreach (Wall wall in objectManager.walls)
-            {
-                if (robot.Hitbox.Intersects(wall.Hitbox))
-                {
-                    robot.ReverseDirection();
-                }
-            }
         }
 
         public bool CheckWallCollision()

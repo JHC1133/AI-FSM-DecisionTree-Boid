@@ -19,10 +19,7 @@ namespace NewUppgift1AI
             Debug.WriteLine("Robot Enter FLEE");
             robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
-            if (CheckWallCollision())
-            {
-                stateMachine.ChangeState(robot.objectManager.CollissionState);
-            }
+           
             
         }
 
@@ -33,7 +30,18 @@ namespace NewUppgift1AI
 
         public override void Update(GameTime gameTime)
         {
-            
+            //if (CheckWallCollision())
+            //{
+            //    stateMachine.ChangeState(robot.objectManager.CollissionState);
+            //}
+
+            foreach (Wall wall in objectManager.walls)
+            {
+                if (robot.Hitbox.Intersects(wall.Hitbox))
+                {
+                    robot.ReverseDirection();
+                }
+            }
         }
 
         public bool CheckWallCollision()
