@@ -52,7 +52,7 @@ namespace NewUppgift1AI
             position = new Vector2(500, 500);
 
             thirstTimer = thirstTimerDefault;
-            //peeTimer = peeTimerDefault;
+            peeTimer = peeTimerDefault;
 
             newDecisionTree = new DT();
 
@@ -68,10 +68,17 @@ namespace NewUppgift1AI
             Position += direction * velocity;
             Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
+            peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (hasDrunk)
             {
                 peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                isDogThirsty = false;
+
+                if (peeTimer <= 0)
+                {
+                    hasPeed = false;
+                }
             }
             else if (hasPeed)
             {
