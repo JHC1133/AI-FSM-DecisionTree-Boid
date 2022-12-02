@@ -26,12 +26,13 @@ namespace NewUppgift1AI
 
         public abstract void Update(GameTime gameTime);
 
-        public virtual void DogRageModeCheck()
+        public bool DogRageModeCheck()
         {
             if (objectManager.dog.rageMode)
             {
-                stateMachine.ChangeState(robot.objectManager.FleeState);
+                return true;
             }
+            return false;
         }
     }
 }

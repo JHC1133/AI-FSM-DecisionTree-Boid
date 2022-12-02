@@ -25,6 +25,7 @@ namespace NewUppgift1AI
         int rageTimer;
 
         int peeDelay;
+        int drinkDelay;
         int moveDirectionTimer; //Move to local?
 
         int peeTimerDefault = 5000;
@@ -32,6 +33,7 @@ namespace NewUppgift1AI
         int rageTimerDefault = 5000;
 
         int peeDelayDefault = 1000;
+        int drinkDelayDefault = 1500;
 
         public bool isDogThirsty;
         public bool isThereWater;
@@ -57,17 +59,18 @@ namespace NewUppgift1AI
             this.objectManager = objectManager;
             texture = TextureManager.dogTex;
             position = new Vector2(500, 500);
-
-            
+         
             peeTimer = peeTimerDefault;
+            drinkDelay = drinkDelayDefault;
 
             newDecisionTree = new DT();
 
-            isThereWater = false; //Set by clicking on bowl, public static?
+            isThereWater = true; //Set by clicking on bowl, public static?
             isDogThirsty = true; //Starts with true to begin loop
-            isPeeTimerZero = false;
+            //isPeeTimerZero = false;
 
             //moveMode = true;
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -115,11 +118,7 @@ namespace NewUppgift1AI
 
                 if (peeDelay <= 0)
                 {
-                    objectManager.peeList.Add(new Pee(Position));
-                    hasDrunk = false;
-                    hasPeed = true;
-                    peeTimer = peeTimerDefault;
-                    isPeeTimerZero = false; //Breaks loop
+                    Pee();
                 }
 
             }
@@ -128,49 +127,51 @@ namespace NewUppgift1AI
                 Debug.WriteLine("Dog is in RAGEmode");
                 SetVelocity(Data.dogRageModeVel);
                 SetDirection(objectManager.robot.Position, Position);
-                
+                CheckWallCollision();
+
             }
             else if (drinkMode)
             {
                 Debug.WriteLine("Dog is in DRINKmode");
                 SetDirection(objectManager.waterBowl.position, Position);
-                SetVelocity(6f);
+                SetVelocity(Data.dogDrinkModeVel);
 
-                if (GetDistance(objectManager.waterBowl.position, Position) < 25)
+                if (GetDistance(objectManager.waterBowl.position, Position) < 100)
                 {
-                    Drink();                    
+                    SetVelocity(Data.zero);
+                    drinkDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (drinkDelay <= 0)
+                    {
+                        Drink();
+                        drinkDelay = drinkDelayDefault;
+                    }                                  
                 }             
             }
         }
 
-        private void Drink()
-        {
-            
-            hasDrunk = true;
-            peeDelay = peeDelayDefault;
-            thirstTimer = thirstTimerDefault;
-
-            //isThereWater = false;
-            isDogThirsty = false; //Breaks loop
-            objectManager.waterBowl.waterAvailable = false;
-
-        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, color);
         }
 
-        private void Pee(GameTime gameTime)
+        private void Drink()
         {
-            SetVelocity(Data.zero);
-         
-            peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            hasDrunk = true;
+            peeDelay = peeDelayDefault;
+            thirstTimer = thirstTimerDefault;
+            isDogThirsty = false; //Breaks loop
+            objectManager.waterBowl.waterAvailable = false;
+        }
 
-            if (peeDelay <= 0)
-            {
-                peeTimer = peeTimerDefault;
-            }
+        private void Pee()
+        {
+            objectManager.peeList.Add(new Pee(Position));
+            hasDrunk = false;
+            hasPeed = true;
+            peeTimer = peeTimerDefault;
+            isPeeTimerZero = false; //Breaks loop
         }
 
         private void ThirstMeterCheck()

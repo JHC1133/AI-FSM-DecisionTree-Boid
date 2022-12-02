@@ -21,8 +21,12 @@ namespace NewUppgift1AI
         /// Movement
         /// </summary>
         public static float robotDefaultVel = 5.5f;
+        public static float robotFleeModeVel = 7f;
+
         public static float dogDefaultVel = 3.5f;
-        public static float dogRageModeVel = 5.4f;
+        public static float dogDrinkModeVel = 4.5f;
+        public static float dogRageModeVel = 6f;
+
         public static float zero = 0f;
     }
 }

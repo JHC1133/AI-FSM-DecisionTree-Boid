@@ -17,10 +17,8 @@ namespace NewUppgift1AI
         public override void Enter()
         {
             Debug.WriteLine("Robot Enter FLEE");
-            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
-
-           
             
+            robot.SetVelocity(Data.robotFleeModeVel);           
         }
 
         public override void Exit()
@@ -34,6 +32,10 @@ namespace NewUppgift1AI
             //{
             //    stateMachine.ChangeState(robot.objectManager.CollissionState);
             //}
+
+            Debug.WriteLine("Robot UPDATE FLEE");
+
+            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
             foreach (Wall wall in objectManager.walls)
             {

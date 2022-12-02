@@ -31,7 +31,6 @@ namespace NewUppgift1AI
 
             int outcome;
 
-
             if (currentOrientation == Data.up || currentOrientation == Data.down)
             {
                 outcome = random.Next(1, 3);
@@ -59,8 +58,8 @@ namespace NewUppgift1AI
                 }
             }
 
-            Debug.WriteLine("You shouldnt have made it here");
-            return Data.right;
+            //Start point
+            return Data.up;
 
             //switch (outcome)
             //{
@@ -131,7 +130,8 @@ namespace NewUppgift1AI
         /// <param name="position"></param>
         public virtual void SetEvadeDirection(Vector2 evadeDirection, Vector2 position)
         {
-            direction = evadeDirection;
+            //direction = evadeDirection;
+            this.direction = position - evadeDirection;
             this.direction.Normalize();
             currentOrientation = direction;
         }

@@ -24,7 +24,7 @@ namespace NewUppgift1AI
             robot.SetVelocity(Data.robotDefaultVel);
 
             robot.SetDirection(robot.RandomMovement());
-            //robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
+            
 
         }
 
@@ -44,7 +44,12 @@ namespace NewUppgift1AI
             {
                 stateMachine.ChangeState(robot.objectManager.CollissionState);
             }
+            else if (DogRageModeCheck())
+            {
+                stateMachine.ChangeState(robot.objectManager.FleeState);
+            }
 
+            
         }
 
         public bool CheckWallCollision()

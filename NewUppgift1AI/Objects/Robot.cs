@@ -64,6 +64,10 @@ namespace NewUppgift1AI
             {
                 objectManager.CleanState.Update(gameTime);
             }
+            else if (stateMachine.currentState == objectManager.FleeState)
+            {
+                objectManager.FleeState.Update(gameTime);
+            }
         }
     }
 }
