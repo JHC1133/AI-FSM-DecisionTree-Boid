@@ -15,7 +15,7 @@ namespace NewUppgift1AI
         //public CollissionState CollissionState { get; private set; }
         //public ChaseState ChaseState { get; private set; }
         //public CleanState CleanState { get; private set; }
-        //public FleeState FleeState { get; private set; }
+        //public FleeState FleeState { get; private set; } 
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
