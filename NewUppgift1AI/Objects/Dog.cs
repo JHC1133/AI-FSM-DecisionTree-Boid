@@ -46,7 +46,7 @@ namespace NewUppgift1AI
         bool hasPeed;
         bool isRaging;
 
-        bool placeHolderBool; //Remove
+        Color color;
 
 
         public Vector2 Position { get => position; set => position = value; }
@@ -63,7 +63,7 @@ namespace NewUppgift1AI
 
             newDecisionTree = new DT();
 
-            isThereWater = true; //Set by clicking on bowl, public static?
+            isThereWater = false; //Set by clicking on bowl, public static?
             isDogThirsty = true; //Starts with true to begin loop
             isPeeTimerZero = false;
 
@@ -88,6 +88,9 @@ namespace NewUppgift1AI
 
             PeeTimerCheck();
             ThirstMeterCheck();
+            CheckWallCollision();
+            WaterAvailabiltyCheck();
+            RageModeColorToggle();
 
             if (moveMode)
             {
@@ -100,7 +103,7 @@ namespace NewUppgift1AI
                 if (moveDirectionTimer <= 0)
                 {
                     SetDirection(RandomMovement());
-                    moveDirectionTimer = random.Next(1000, 3000);
+                    moveDirectionTimer = random.Next(1000, 7000);
                 }
             }
             else if (peeMode)
@@ -130,27 +133,30 @@ namespace NewUppgift1AI
             {
                 Debug.WriteLine("Dog is in DRINKmode");
                 SetDirection(objectManager.waterBowl.position, Position);
+                SetVelocity(6f);
 
                 if (GetDistance(objectManager.waterBowl.position, Position) < 25)
                 {
-                    objectManager.waterBowl.waterAvailable = false;
-                    hasDrunk = true;
-                    peeDelay = peeDelayDefault;
-                    isDogThirsty = false; //Breaks loop
+                    Drink();                    
                 }             
             }
         }
 
+        private void Drink()
+        {
+            
+            hasDrunk = true;
+            peeDelay = peeDelayDefault;
+
+            //isThereWater = false;
+            isDogThirsty = false; //Breaks loop
+            objectManager.waterBowl.waterAvailable = false;
+
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (rageMode)
-            {
-                spriteBatch.Draw(texture, Position, Color.Red);
-            }
-            else
-            {
-                spriteBatch.Draw(texture, Position, Color.White);
-            }
+            spriteBatch.Draw(texture, Position, color);
         }
 
         private void Pee(GameTime gameTime)
@@ -167,7 +173,7 @@ namespace NewUppgift1AI
 
         private void ThirstMeterCheck()
         {
-            if (thirstTimer <= 0)
+            if (thirstTimer < 0)
             {
                 isDogThirsty = true;
             }
@@ -175,12 +181,47 @@ namespace NewUppgift1AI
 
         private void PeeTimerCheck()
         {
-            if (peeTimer <= 0)
+            if (peeTimer < 0)
             {
                 isPeeTimerZero = true;
             }
         }
 
+        private void WaterAvailabiltyCheck()
+        {
+            if (objectManager.waterBowl.waterAvailable)
+            {
+                isThereWater = true;
+            }
+            else
+            {
+                isThereWater = false;
+            }
+        }
+
+        public void CheckWallCollision()
+        {
+
+            foreach (Wall wall in objectManager.walls)
+            {
+                if (Hitbox.Intersects(wall.Hitbox))
+                {
+                    ReverseDirection();
+                }
+            }
+        }
+
+        private void RageModeColorToggle()
+        {
+            if (rageMode)
+            {
+                color = Color.Red;
+            }
+            else
+            {
+                color = Color.White;
+            }
+        }
 
 
 

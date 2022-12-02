@@ -16,10 +16,10 @@ namespace NewUppgift1AI
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
         public int DetectionRadius { get => detectionRadius; set => detectionRadius = value; }
 
-        public List<Wall> walls;
-        public List<Pee> peeList;
+        //public List<Wall> walls;
+        //public List<Pee> peeList;
         public ObjectManager objectManager;
-        public Dog dog;
+        //public Dog dog;
 
         int detectionRadius = 500;
 

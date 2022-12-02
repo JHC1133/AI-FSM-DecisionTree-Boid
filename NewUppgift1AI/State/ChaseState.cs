@@ -37,6 +37,8 @@ namespace NewUppgift1AI
                     stateMachine.ChangeState(robot.objectManager.CleanState);
                 }
             }
+
+            DogRageModeCheck();
         }
     }
 }

@@ -52,7 +52,7 @@ namespace NewUppgift1AI
 
             if (peeTimer <= 0)
             {
-                RandomPeeAdderPlaceHolder();
+                //RandomPeeAdderPlaceHolder();
             }
         }
 

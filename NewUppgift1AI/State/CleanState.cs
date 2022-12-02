@@ -37,6 +37,9 @@ namespace NewUppgift1AI
             {
                 stateMachine.ChangeState(robot.objectManager.MoveState);
             }
+
+            DogRageModeCheck();
+
         }
 
         private bool PeeRemover()

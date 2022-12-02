@@ -26,7 +26,7 @@ namespace NewUppgift1AI
             position = new Vector2(Game1.WindowX - texture.Width * 2, Game1.WindowY / 2 - texture.Height / 2);
 
             waterBowlTimer = timerDefault;
-            waterAvailable = false;
+            waterAvailable = true;
 
            
         }

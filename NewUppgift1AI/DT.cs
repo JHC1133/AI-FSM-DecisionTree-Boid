@@ -107,10 +107,10 @@ namespace NewUppgift1AI
                 Test = (dog) => dog.drinkMode = true,
                 Positive = new DecisionResult { Result = true },
                 Negative = new DecisionResult { Result = false },
+                DisableDrinkMode = (dog) => dog.drinkMode = true,
                 DisableRageMode = (dog) => dog.rageMode = false,
                 DisablePeeMode = (dog) => dog.peeMode = false,
-                DisableMoveMode = (dog) => dog.moveMode = false,
-                DisableDrinkMode = (dog) => dog.drinkMode = true
+                DisableMoveMode = (dog) => dog.moveMode = false
             };
 
             //Is peetimer zero?

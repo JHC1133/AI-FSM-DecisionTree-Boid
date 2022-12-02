@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +16,37 @@ namespace NewUppgift1AI
 
         public override void Enter()
         {
+            Debug.WriteLine("Robot Enter FLEE");
             robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
+
+            if (CheckWallCollision())
+            {
+                stateMachine.ChangeState(robot.objectManager.CollissionState);
+            }
+            
         }
 
         public override void Exit()
         {
-            
+            Debug.WriteLine("Robot Exit FLEE");
         }
 
         public override void Update(GameTime gameTime)
         {
             
+        }
+
+        public bool CheckWallCollision()
+        {
+
+            foreach (Wall wall in objectManager.walls)
+            {
+                if (robot.Hitbox.Intersects(wall.Hitbox))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
