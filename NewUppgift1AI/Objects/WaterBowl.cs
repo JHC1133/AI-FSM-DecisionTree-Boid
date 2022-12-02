@@ -16,7 +16,7 @@ namespace NewUppgift1AI
         int timerDefault = 3000; //3 seconds
         int waterBowlTimer;
 
-        public static bool waterAvailable;
+        public bool waterAvailable;
 
         
 

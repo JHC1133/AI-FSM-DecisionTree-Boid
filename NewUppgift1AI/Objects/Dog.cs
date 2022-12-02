@@ -23,11 +23,15 @@ namespace NewUppgift1AI
         int thirstTimer;
         int peeTimer;
         int rageTimer;
+
+        int peeDelay;
         int moveDirectionTimer; //Move to local?
 
         int peeTimerDefault = 5000;
         int thirstTimerDefault = 3000;
         int rageTimerDefault = 5000;
+
+        int peeDelayDefault = 1000;
 
         public bool isDogThirsty;
         public bool isThereWater;
@@ -59,7 +63,7 @@ namespace NewUppgift1AI
 
             newDecisionTree = new DT();
 
-            isThereWater = false; //Set by clicking on bowl, public static?
+            isThereWater = true; //Set by clicking on bowl, public static?
             isDogThirsty = true; //Starts with true to begin loop
             isPeeTimerZero = false;
 
@@ -71,7 +75,7 @@ namespace NewUppgift1AI
             Position += direction * velocity;
             Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
-
+            newDecisionTree.root.Evaluate(this);
 
             if (hasDrunk)
             {
@@ -79,19 +83,11 @@ namespace NewUppgift1AI
             }
             else if (hasPeed)
             {
-                
+                thirstTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (isRaging)
-            {
-                
-            }
-
-            newDecisionTree.root.Evaluate(this);
 
             PeeTimerCheck();
             ThirstMeterCheck();
-
-  
 
             if (moveMode)
             {
@@ -109,17 +105,17 @@ namespace NewUppgift1AI
             }
             else if (peeMode)
             {
-
                 Debug.WriteLine("Dog is in PEEmode");
                 SetVelocity(Data.zero);
 
-                //Psuedo, move setting of peeDelay
-                int peeDelay = 1000;
                 peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (peeDelay <= 0)
                 {
-                    peeTimer = peeTimerDefault;
+                    objectManager.peeList.Add(new Pee(Position));
+                    hasDrunk = false;
+                    hasPeed = true;
+                    peeTimer = peeTimerDefault; //Breaks loop
                 }
 
             }
@@ -133,11 +129,16 @@ namespace NewUppgift1AI
             else if (drinkMode)
             {
                 Debug.WriteLine("Dog is in DRINKmode");
-                
-                //SetDirection()
-                
-            }
+                SetDirection(objectManager.waterBowl.position, Position);
 
+                if (GetDistance(objectManager.waterBowl.position, Position) < 25)
+                {
+                    objectManager.waterBowl.waterAvailable = false;
+                    hasDrunk = true;
+                    peeDelay = peeDelayDefault;
+                    isDogThirsty = false; //Breaks loop
+                }             
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -155,20 +156,13 @@ namespace NewUppgift1AI
         private void Pee(GameTime gameTime)
         {
             SetVelocity(Data.zero);
-
-            int peeDelay = 1000;
+         
             peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (peeDelay <= 0)
             {
                 peeTimer = peeTimerDefault;
             }
-        }
-
-
-        private bool WaterLevelCheck()
-        {
-            return false;
         }
 
         private void ThirstMeterCheck()
