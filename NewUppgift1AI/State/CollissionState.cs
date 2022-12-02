@@ -47,7 +47,7 @@ namespace NewUppgift1AI
 
                 if (directionCalculationTimer <= 0)
                 {
-                    stateMachine.ChangeState(robot.MoveState);
+                    stateMachine.ChangeState(robot.objectManager.MoveState);
                 }
             }
         }

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,12 @@ namespace NewUppgift1AI
 {
     internal class ObjectManager
     {
+        public MoveState MoveState { get; private set; }
+        public CollissionState CollissionState { get; private set; }
+        public ChaseState ChaseState { get; private set; }
+        public CleanState CleanState { get; private set; }
+        public FleeState FleeState { get; private set; }
+
         public List<Wall> walls;
         public List<Pee> peeList;
 
@@ -32,6 +39,7 @@ namespace NewUppgift1AI
             peeList = new List<Pee>();
 
             InitEntities(stateMachine);
+            InitRobotStates(robot, this, stateMachine);
         }
         public void Update(GameTime gameTime)
         {
@@ -100,6 +108,17 @@ namespace NewUppgift1AI
         {
             robot = new Robot(stateMachine, this);
             dog = new Dog(this);
+        }
+
+        private void InitRobotStates(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine)
+        {
+            MoveState = new MoveState(robot, objectManager, stateMachine);
+            CollissionState = new CollissionState(robot, objectManager, stateMachine);
+            ChaseState = new ChaseState(robot, this, stateMachine);
+            CleanState = new CleanState(robot, objectManager, stateMachine);
+            FleeState = new FleeState(robot, objectManager, stateMachine);
+
+            stateMachine.Initialize(objectManager.MoveState);
         }
 
         private void UpdateEntities(GameTime gameTime)

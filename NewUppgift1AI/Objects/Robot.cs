@@ -11,11 +11,11 @@ namespace NewUppgift1AI
 {
     internal class Robot : Entity
     {
-        public MoveState MoveState { get; private set; }
-        public CollissionState CollissionState { get; private set; }
-        public ChaseState ChaseState { get; private set; }
-        public CleanState CleanState { get; private set; }
-        public FleeState FleeState { get; private set; }
+        //public MoveState MoveState { get; private set; }
+        //public CollissionState CollissionState { get; private set; }
+        //public ChaseState ChaseState { get; private set; }
+        //public CleanState CleanState { get; private set; }
+        //public FleeState FleeState { get; private set; }
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
@@ -39,13 +39,13 @@ namespace NewUppgift1AI
             this.objectManager = objectManager;
             this.dog = dog;
 
-            MoveState = new MoveState(this, objectManager, stateMachine);
-            CollissionState = new CollissionState(this, objectManager, stateMachine);
-            ChaseState = new ChaseState(this, objectManager, stateMachine);
-            CleanState = new CleanState(this, objectManager, stateMachine);
-            FleeState = new FleeState(this, objectManager, stateMachine);
+            //MoveState = new MoveState(this, objectManager, stateMachine);
+            //CollissionState = new CollissionState(this, objectManager, stateMachine);
+            //ChaseState = new ChaseState(this, objectManager, stateMachine);
+            //CleanState = new CleanState(this, objectManager, stateMachine);
+            //FleeState = new FleeState(this, objectManager, stateMachine);
 
-            stateMachine.Initialize(MoveState);
+            //stateMachine.Initialize(objectManager.MoveState);
         }
 
         public override void Update(GameTime gameTime) 
@@ -63,21 +63,21 @@ namespace NewUppgift1AI
 
         private void RobotStateUpdate(GameTime gameTime)
         {
-            if (stateMachine.currentState == MoveState)
+            if (stateMachine.currentState == objectManager.MoveState)
             {
-                MoveState.Update(gameTime);
+                objectManager.MoveState.Update(gameTime);
             }
-            else if (stateMachine.currentState == CollissionState)
+            else if (stateMachine.currentState == objectManager.CollissionState)
             {
-                CollissionState.Update(gameTime);
+                objectManager.CollissionState.Update(gameTime);
             }
-            else if (stateMachine.currentState == ChaseState)
+            else if (stateMachine.currentState == objectManager.ChaseState)
             {
-                ChaseState.Update(gameTime);
+                objectManager.ChaseState.Update(gameTime);
             }
-            else if (stateMachine.currentState == CleanState)
+            else if (stateMachine.currentState == objectManager.CleanState)
             {
-                CleanState.Update(gameTime);
+                objectManager.CleanState.Update(gameTime);
             }
         }
     }

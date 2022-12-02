@@ -23,8 +23,8 @@ namespace NewUppgift1AI
             Debug.WriteLine("Enter Move");
             robot.SetVelocity(Data.robotDefaultVel);
 
-            //robot.SetDirection(robot.RandomMovement());
-            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
+            robot.SetDirection(robot.RandomMovement());
+            //robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
         }
 
@@ -38,11 +38,11 @@ namespace NewUppgift1AI
 
             if (CheckRobotPeeDistance(objectManager.peeList))
             {
-                stateMachine.ChangeState(robot.ChaseState);
+                stateMachine.ChangeState(robot.objectManager.ChaseState);
             }
             else if (CheckWallCollision())
             {
-                stateMachine.ChangeState(robot.CollissionState);
+                stateMachine.ChangeState(robot.objectManager.CollissionState);
             }
         }
 
