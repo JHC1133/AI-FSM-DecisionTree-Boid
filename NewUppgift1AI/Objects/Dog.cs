@@ -46,18 +46,18 @@ namespace NewUppgift1AI
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
 
-        public Dog()
+        public Dog(WaterBowl waterBowl, List<Wall> walls, List<Pee> pee, Robot robot)
         {
             texture = TextureManager.dogTex;
             position = new Vector2(500, 500);
 
-            thirstTimer = thirstTimerDefault;
+            
             peeTimer = peeTimerDefault;
 
             newDecisionTree = new DT();
 
-            isThereWater = false;
-            //isDogThirsty = false;
+            isThereWater = true; //Set by clicking on bowl, public static?
+            isDogThirsty = true; //Starts with true to begin loop
             isPeeTimerZero = false;
 
             //moveMode = true;
@@ -68,25 +68,19 @@ namespace NewUppgift1AI
             Position += direction * velocity;
             Hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
 
-            peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
 
             if (hasDrunk)
             {
                 peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-                isDogThirsty = false;
-
-                if (peeTimer <= 0)
-                {
-                    hasPeed = false;
-                }
             }
             else if (hasPeed)
             {
-                thirstTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                
             }
             else if (isRaging)
             {
-                rageTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                
             }
 
             newDecisionTree.root.Evaluate(this);
@@ -116,16 +110,13 @@ namespace NewUppgift1AI
                 Debug.WriteLine("Dog is in PEEmode");
                 SetVelocity(Data.zero);
 
-                thirstTimer = thirstTimerDefault;
-
-                //TODO: code for peeList.Add(pee)
-
+                //Psuedo, move setting of peeDelay
                 int peeDelay = 1000;
                 peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (peeDelay <= 0)
                 {
-                    isPeeTimerZero = false; //Should make dog enter Move
+                    peeTimer = peeTimerDefault;
                 }
 
             }
@@ -138,7 +129,8 @@ namespace NewUppgift1AI
             else if (drinkMode)
             {
                 Debug.WriteLine("Dog is in DRINKmode");
-                peeTimer = peeTimerDefault;
+                
+                //SetDirection()
                 
             }
 
@@ -153,6 +145,19 @@ namespace NewUppgift1AI
             else
             {
                 spriteBatch.Draw(texture, Position, Color.White);
+            }
+        }
+
+        private void Pee(GameTime gameTime)
+        {
+            SetVelocity(Data.zero);
+
+            int peeDelay = 1000;
+            peeDelay -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (peeDelay <= 0)
+            {
+                peeTimer = peeTimerDefault;
             }
         }
 

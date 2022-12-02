@@ -24,9 +24,11 @@ namespace NewUppgift1AI
         public List<Wall> walls;
         public List<Pee> peeList;
 
+        public Dog dog;
+
         int detectionRadius = 500;
 
-        public Robot(FiniteStateMachine stateMachine, List<Wall> walls, List<Pee> peeList)
+        public Robot(FiniteStateMachine stateMachine, List<Wall> walls, List<Pee> peeList, Dog dog)
         {
             texture = TextureManager.robotTex;
             position = new Vector2(700, 500);
@@ -34,6 +36,7 @@ namespace NewUppgift1AI
             this.walls = walls;
             this.peeList = peeList;
             this.stateMachine = stateMachine;
+            this.dog = dog;
 
             MoveState = new MoveState(this, stateMachine);
             CollissionState = new CollissionState(this, stateMachine);
@@ -41,7 +44,7 @@ namespace NewUppgift1AI
             CleanState = new CleanState(this, stateMachine);
             FleeState = new FleeState(this, stateMachine);
 
-            stateMachine.Initialize(MoveState);
+            stateMachine.Initialize(FleeState);
         }
 
         public override void Update(GameTime gameTime) 

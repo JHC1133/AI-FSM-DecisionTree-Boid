@@ -98,8 +98,8 @@ namespace NewUppgift1AI
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
-            robot = new Robot(stateMachine, walls, peeList);
-            dog = new Dog();
+            robot = new Robot(stateMachine, walls, peeList, dog);
+            dog = new Dog(waterBowl, walls, peeList, robot);
         }
 
         private void UpdateEntities(GameTime gameTime)

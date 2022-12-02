@@ -15,7 +15,7 @@ namespace NewUppgift1AI
 
         public override void Enter()
         {
-            
+            robot.SetEvadeDirection(robot.dog.Position, robot.Position);
         }
 
         public override void Exit()
