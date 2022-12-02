@@ -70,6 +70,7 @@ namespace NewUppgift1AI
             //isPeeTimerZero = false;
 
             //moveMode = true;
+            //rageMode = true;
             
         }
 

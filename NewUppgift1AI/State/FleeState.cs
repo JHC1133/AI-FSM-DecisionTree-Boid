@@ -37,16 +37,18 @@ namespace NewUppgift1AI
 
             robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
-            foreach (Wall wall in objectManager.walls)
+            if (CheckWallCollision())
             {
-                if (robot.Hitbox.Intersects(wall.Hitbox))
-                {
-                    robot.ReverseDirection();
-                }
+                robot.ReverseDirection();
+            }
+
+            if (!DogRageModeCheck())
+            {
+                stateMachine.ChangeState(objectManager.MoveState);
             }
         }
 
-        public bool CheckWallCollision()
+        private bool CheckWallCollision()
         {
 
             foreach (Wall wall in objectManager.walls)
