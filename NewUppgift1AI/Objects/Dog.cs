@@ -59,7 +59,7 @@ namespace NewUppgift1AI
 
             newDecisionTree = new DT();
 
-            isThereWater = true; //Set by clicking on bowl, public static?
+            isThereWater = false; //Set by clicking on bowl, public static?
             isDogThirsty = true; //Starts with true to begin loop
             isPeeTimerZero = false;
 
@@ -127,6 +127,7 @@ namespace NewUppgift1AI
             {
                 Debug.WriteLine("Dog is in RAGEmode");
                 SetVelocity(Data.dogRageModeVel);
+                SetDirection(objectManager.robot.Position, Position);
                 
             }
             else if (drinkMode)

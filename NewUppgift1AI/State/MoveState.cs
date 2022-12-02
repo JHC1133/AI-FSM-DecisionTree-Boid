@@ -23,7 +23,8 @@ namespace NewUppgift1AI
             Debug.WriteLine("Enter Move");
             robot.SetVelocity(Data.robotDefaultVel);
 
-            robot.SetDirection(robot.RandomMovement());
+            //robot.SetDirection(robot.RandomMovement());
+            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
         }
 
