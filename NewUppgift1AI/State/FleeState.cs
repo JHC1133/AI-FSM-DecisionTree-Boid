@@ -9,13 +9,13 @@ namespace NewUppgift1AI
 {
     internal class FleeState : State
     {
-        public FleeState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
+        public FleeState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
         }
 
         public override void Enter()
         {
-            robot.SetEvadeDirection(robot.dog.Position, robot.Position);
+            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
         }
 
         public override void Exit()

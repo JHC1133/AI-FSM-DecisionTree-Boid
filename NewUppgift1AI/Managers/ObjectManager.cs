@@ -16,9 +16,9 @@ namespace NewUppgift1AI
         Wall top, bottom, leftSide, rightSide;        
         Interior floor;
 
-        Robot robot;
-        Dog dog;
-        WaterBowl waterBowl;
+        public Robot robot;
+        public Dog dog;
+        public WaterBowl waterBowl;
 
         int peeDefaultVal = 7000;
         int peeTimer = 7000;
@@ -98,8 +98,9 @@ namespace NewUppgift1AI
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
-            robot = new Robot(stateMachine, walls, peeList, dog);
-            dog = new Dog(waterBowl, walls, peeList, robot);
+            dog = new Dog(this);
+            robot = new Robot(stateMachine, this);
+            
         }
 
         private void UpdateEntities(GameTime gameTime)

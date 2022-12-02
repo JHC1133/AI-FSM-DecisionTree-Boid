@@ -13,7 +13,7 @@ namespace NewUppgift1AI
         int directionCalculationTimer = 1000;
         int dirCalcTimerDefault = 1000;
 
-        public CleanState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
+        public CleanState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }

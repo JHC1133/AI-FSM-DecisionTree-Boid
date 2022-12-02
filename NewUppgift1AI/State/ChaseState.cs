@@ -9,7 +9,7 @@ namespace NewUppgift1AI
 {
     internal class ChaseState : State
     {
-        public ChaseState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
+        public ChaseState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }

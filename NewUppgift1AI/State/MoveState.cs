@@ -12,7 +12,7 @@ namespace NewUppgift1AI
     {
         int moveDirectionTimer = 13000;
 
-        public MoveState(Robot robot, FiniteStateMachine stateMachine) : base(robot, stateMachine)
+        public MoveState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }

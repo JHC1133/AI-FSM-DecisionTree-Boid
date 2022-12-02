@@ -18,6 +18,8 @@ namespace NewUppgift1AI
         BinaryTree binaryTree;
         DT newDecisionTree;
 
+        public ObjectManager objectManager;
+
         int thirstTimer;
         int peeTimer;
         int rageTimer;
@@ -46,8 +48,9 @@ namespace NewUppgift1AI
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
 
-        public Dog(WaterBowl waterBowl, List<Wall> walls, List<Pee> pee, Robot robot)
+        public Dog(ObjectManager objectManager)
         {
+            this.objectManager = objectManager;
             texture = TextureManager.dogTex;
             position = new Vector2(500, 500);
 
