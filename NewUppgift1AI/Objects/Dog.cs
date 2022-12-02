@@ -14,15 +14,12 @@ namespace NewUppgift1AI
 {
     internal class Dog : Entity
     {
-        DecisionTree decisionTree;
-        BinaryTree binaryTree;
         DT newDecisionTree;
 
         public ObjectManager objectManager;
 
         int thirstTimer;
         int peeTimer;
-        int rageTimer;
 
         int peeDelay;
         int drinkDelay;
@@ -30,7 +27,6 @@ namespace NewUppgift1AI
 
         int peeTimerDefault = 5000;
         int thirstTimerDefault = 3000;
-        int rageTimerDefault = 5000;
 
         int peeDelayDefault = 1000;
         int drinkDelayDefault = 1500;
@@ -46,10 +42,8 @@ namespace NewUppgift1AI
 
         bool hasDrunk;
         bool hasPeed;
-        bool isRaging;
 
         Color color;
-
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; set => hitbox = value; }
