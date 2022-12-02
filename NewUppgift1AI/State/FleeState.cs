@@ -9,7 +9,7 @@ namespace NewUppgift1AI
 {
     internal class FleeState : State
     {
-        public FleeState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
+        public FleeState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
         {
         }
 

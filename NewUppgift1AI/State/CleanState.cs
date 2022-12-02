@@ -13,7 +13,7 @@ namespace NewUppgift1AI
         int directionCalculationTimer = 1000;
         int dirCalcTimerDefault = 1000;
 
-        public CleanState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
+        public CleanState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
         {
 
         }
@@ -41,11 +41,11 @@ namespace NewUppgift1AI
 
         private bool PeeRemover()
         {
-            foreach (Pee pee in robot.peeList)
+            foreach (Pee pee in objectManager.peeList)
             {
                 if (robot.GetDistance(robot.Position, pee.position) < 25)
                 {
-                    robot.peeList.Remove(pee);
+                    objectManager.peeList.Remove(pee);
                     return true;
                 }              
             }

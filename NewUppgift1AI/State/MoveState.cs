@@ -12,7 +12,7 @@ namespace NewUppgift1AI
     {
         int moveDirectionTimer = 13000;
 
-        public MoveState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
+        public MoveState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
         {
 
         }
@@ -35,7 +35,7 @@ namespace NewUppgift1AI
         public override void Update(GameTime gameTime)
         {
 
-            if (CheckRobotPeeDistance(robot.peeList))
+            if (CheckRobotPeeDistance(objectManager.peeList))
             {
                 stateMachine.ChangeState(robot.ChaseState);
             }
@@ -48,7 +48,7 @@ namespace NewUppgift1AI
         public bool CheckWallCollision()
         {
 
-            foreach (Wall wall in robot.walls)
+            foreach (Wall wall in objectManager.walls)
             {
                 if (robot.Hitbox.Intersects(wall.Hitbox))
                 {

@@ -16,7 +16,7 @@ namespace NewUppgift1AI
         int directionCalcDefault = 550;
         int directionCalculationTimer = 550;
 
-        public CollissionState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
+        public CollissionState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
         {
 
         }

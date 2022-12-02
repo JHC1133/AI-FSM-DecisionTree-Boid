@@ -25,13 +25,13 @@ namespace NewUppgift1AI
 
         public ObjectManager(FiniteStateMachine stateMachine)
         {
+            
             InitStaticObjects();
             floor = new Interior(Vector2.Zero);
             waterBowl = new WaterBowl();
             peeList = new List<Pee>();
 
             InitEntities(stateMachine);
-
         }
         public void Update(GameTime gameTime)
         {
@@ -98,9 +98,8 @@ namespace NewUppgift1AI
 
         private void InitEntities(FiniteStateMachine stateMachine)
         {
-            dog = new Dog(this);
             robot = new Robot(stateMachine, this);
-            
+            dog = new Dog(this);
         }
 
         private void UpdateEntities(GameTime gameTime)

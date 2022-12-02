@@ -39,13 +39,13 @@ namespace NewUppgift1AI
             this.objectManager = objectManager;
             this.dog = dog;
 
-            MoveState = new MoveState(objectManager, stateMachine);
-            CollissionState = new CollissionState(objectManager, stateMachine);
-            ChaseState = new ChaseState(objectManager, stateMachine);
-            CleanState = new CleanState(objectManager, stateMachine);
-            FleeState = new FleeState(objectManager, stateMachine);
+            MoveState = new MoveState(this, objectManager, stateMachine);
+            CollissionState = new CollissionState(this, objectManager, stateMachine);
+            ChaseState = new ChaseState(this, objectManager, stateMachine);
+            CleanState = new CleanState(this, objectManager, stateMachine);
+            FleeState = new FleeState(this, objectManager, stateMachine);
 
-            stateMachine.Initialize(FleeState);
+            stateMachine.Initialize(MoveState);
         }
 
         public override void Update(GameTime gameTime) 
