@@ -27,16 +27,22 @@ namespace NewUppgift1AI
         public Dog dog;
         public WaterBowl waterBowl;
 
+        Aquarium aquarium;
+        AqWater aqWater;
+        Flock flock;
+
+
         int peeDefaultVal = 7000;
         int peeTimer = 7000;
 
         public ObjectManager(FiniteStateMachine stateMachine)
         {
             
-            InitStaticObjects();
+            InitNonMoveObjects();
             floor = new Interior(Vector2.Zero);
             waterBowl = new WaterBowl();
             peeList = new List<Pee>();
+            flock = new Flock();
 
             InitEntities(stateMachine);
             InitRobotStates(robot, this, stateMachine);
@@ -47,6 +53,7 @@ namespace NewUppgift1AI
             UpdateEntities(gameTime);
             UpdatePeeList();
             waterBowl.Update(gameTime);
+            flock.Update();
 
             peeTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -59,14 +66,16 @@ namespace NewUppgift1AI
         public void Draw(SpriteBatch spriteBatch)
         {
            
-            DrawStaticObjects(spriteBatch);
+            DrawNonMovObjects(spriteBatch);
+            flock.Draw(spriteBatch);
+            aqWater.Draw(spriteBatch);
 
             DrawPeeList(spriteBatch);
             DrawEntities(spriteBatch);
             
         }
 
-        private void InitStaticObjects()
+        private void InitNonMoveObjects()
         {
             int wallWidth = 116;
 
@@ -75,6 +84,8 @@ namespace NewUppgift1AI
             leftSide = new Wall(Vector2.Zero, TextureManager.wallSideTex);
             rightSide = new Wall(new Vector2(Game1.WindowX - wallWidth, 0), TextureManager.wallSideTex);
             floor = new Interior(Vector2.Zero);
+            aquarium = new Aquarium();
+            aqWater = new AqWater();
 
             walls = new List<Wall>
             {
@@ -89,10 +100,11 @@ namespace NewUppgift1AI
             leftSide.Update();
             rightSide.Update();
 
+            aquarium.Update();
             
         }
 
-        private void DrawStaticObjects(SpriteBatch spriteBatch)
+        private void DrawNonMovObjects(SpriteBatch spriteBatch)
         {
             floor.Draw(spriteBatch);
 
@@ -102,6 +114,7 @@ namespace NewUppgift1AI
             rightSide.Draw(spriteBatch);
            
             waterBowl.Draw(spriteBatch);
+            aquarium.Draw(spriteBatch);
         }
 
         private void InitEntities(FiniteStateMachine stateMachine)

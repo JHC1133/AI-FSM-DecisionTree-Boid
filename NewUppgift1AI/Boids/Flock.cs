@@ -10,13 +10,16 @@ namespace NewUppgift1AI
 {
     internal class Flock
     {
+        AqWater aqWater;
         private List<Boid> boids;
 
         private int numBoids = 100;
         private static Random rand = new Random();
 
-        public Flock()
+        public Flock(AqWater aqWater)
         {
+            this.aqWater = aqWater;
+
             boids = new List<Boid>();
 
             for (int i = 0; i < numBoids; i++)

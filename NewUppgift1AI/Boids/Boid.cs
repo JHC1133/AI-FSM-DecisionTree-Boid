@@ -16,8 +16,6 @@ namespace NewUppgift1AI
         private const int speed = 5;
         private const int turnSpeed = 30 / speed;
 
-        int x, y;
-
         public Vector2 position { get; private set; }
         public Vector2 cellPosition { get; private set; }
 
@@ -28,7 +26,7 @@ namespace NewUppgift1AI
 
         public Boid(int x, int y, Flock flock)
         {
-            this.position = new Vector2(this.x, this.y);
+            this.position = new Vector2(x, y);
             this.flock = flock;
             
             texture = TextureManager.fishTex;
@@ -61,29 +59,9 @@ namespace NewUppgift1AI
 
         private void Borders()
         {
-            //if (position.X < 0 || position.X > Game1.WindowX ||
-            //    position.Y < 0 || position.Y > Game1.WindowY)
-            //    position = new Vector2(Game1.WindowX / 2, Game1.WindowY / 2);
-
-            //float pad = 50;
-            //float turn = 0.5f;
-
-            //if (boid.x < pad)
-            //{
-            //    boid.velocity.X += turn;
-            //}
-            //if (boid.x > Game1.WindowX - pad)
-            //{
-            //    boid.velocity.X -= turn;
-            //}
-            //if (boid.y < pad)
-            //{
-            //    boid.velocity.Y += turn;
-            //}
-            //if (boid.y > Game1.WindowY - pad)
-            //{
-            //    boid.velocity.Y -= turn;
-            //}
+            if (position.X < 0 || position.X > Game1.WindowX ||
+                position.Y < 0 || position.Y > Game1.WindowY)
+                position = new Vector2(Game1.WindowX / 2, Game1.WindowY / 2);
         }
 
 

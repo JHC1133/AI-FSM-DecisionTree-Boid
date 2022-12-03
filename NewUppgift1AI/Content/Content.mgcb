@@ -25,6 +25,42 @@
 /processorParam:TextureFormat=Color
 /build:322868_1100-800x825.jpg
 
+#begin aquariumBase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:aquariumBase.png
+
+#begin aquariumWater.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:aquariumWater.png
+
+#begin dogAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:dogAlpha.png
+
 #begin download.jfif
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:fish.png
 
+#begin fishAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fishAlpha.png
+
 #begin peePuddle.jfif
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -60,6 +108,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:peePuddle.jfif
+
+#begin peePuddleAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:peePuddleAlpha.png
+
+#begin robotAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:robotAlpha.png
 
 #begin wallSide.png
 /importer:TextureImporter
@@ -97,6 +169,18 @@
 /processorParam:TextureFormat=Color
 /build:waterBowl.jpg
 
+#begin waterBowlAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:waterBowlAlpha.png
+
 #begin waterBowlFilled.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,6 +192,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:waterBowlFilled.png
+
+#begin waterBowlFilledAlpha.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:waterBowlFilledAlpha.png
 
 #begin woodenFloor.png
 /importer:TextureImporter
