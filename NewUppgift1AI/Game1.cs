@@ -13,6 +13,8 @@ namespace NewUppgift1AI
         FiniteStateMachine stateMachine;
         ObjectManager objectManager;
 
+        Flock flock;
+
         const int windowX = 2500, windowY = 1500;
         public static int WindowX => windowX;
         public static int WindowY => windowY;
@@ -42,6 +44,8 @@ namespace NewUppgift1AI
             stateMachine = new FiniteStateMachine();
             objectManager = new ObjectManager(stateMachine);
 
+            flock = new Flock();
+
             base.Initialize();
         }
 
@@ -60,6 +64,8 @@ namespace NewUppgift1AI
             objectManager.Update(gameTime);
             InputManager.Update();
 
+            flock.Update();
+
             base.Update(gameTime);
         }
 
@@ -69,6 +75,7 @@ namespace NewUppgift1AI
 
             spriteBatch.Begin();
             objectManager.Draw(spriteBatch);
+            flock.Draw(spriteBatch);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
