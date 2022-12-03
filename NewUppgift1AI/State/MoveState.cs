@@ -40,7 +40,7 @@ namespace NewUppgift1AI
             {
                 stateMachine.ChangeState(robot.objectManager.ChaseState);
             }
-            else if (CheckWallCollision())
+            else if (CheckWallCollision() || CheckAquariumCollision())
             {
                 stateMachine.ChangeState(robot.objectManager.CollissionState);
             }
@@ -61,6 +61,15 @@ namespace NewUppgift1AI
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        public bool CheckAquariumCollision()
+        {
+            if (robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
+            {
+                return true;
             }
             return false;
         }

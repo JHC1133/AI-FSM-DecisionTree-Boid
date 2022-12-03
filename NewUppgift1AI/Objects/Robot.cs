@@ -26,7 +26,7 @@ namespace NewUppgift1AI
         public Robot(FiniteStateMachine stateMachine, ObjectManager objectManager)
         {
             texture = TextureManager.robotTex;
-            position = new Vector2(700, 500);
+            position = new Vector2(800, 500);
 
             this.stateMachine = stateMachine;
             this.objectManager = objectManager;

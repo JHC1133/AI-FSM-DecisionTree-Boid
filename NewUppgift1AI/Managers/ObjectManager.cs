@@ -27,7 +27,7 @@ namespace NewUppgift1AI
         public Dog dog;
         public WaterBowl waterBowl;
 
-        Aquarium aquarium;
+        public Aquarium aquarium;
         AqWater aqWater;
         Flock flock;
 
@@ -42,7 +42,7 @@ namespace NewUppgift1AI
             floor = new Interior(Vector2.Zero);
             waterBowl = new WaterBowl();
             peeList = new List<Pee>();
-            flock = new Flock();
+            flock = new Flock(aqWater);
 
             InitEntities(stateMachine);
             InitRobotStates(robot, this, stateMachine);

@@ -23,9 +23,11 @@ namespace NewUppgift1AI
         public Vector2 acceleration;
 
         Flock flock;
+        AqWater aqWater;
 
-        public Boid(int x, int y, Flock flock)
+        public Boid(int x, int y, Flock flock, AqWater aqWater)
         {
+            this.aqWater = aqWater;
             this.position = new Vector2(x, y);
             this.flock = flock;
             
@@ -59,9 +61,9 @@ namespace NewUppgift1AI
 
         private void Borders()
         {
-            if (position.X < 0 || position.X > Game1.WindowX ||
-                position.Y < 0 || position.Y > Game1.WindowY)
-                position = new Vector2(Game1.WindowX / 2, Game1.WindowY / 2);
+            if (position.X < 0 || position.X > aqWater.Texture.Width ||
+                position.Y < 0 || position.Y > aqWater.Texture.Height)
+                position = new Vector2(aqWater.Texture.Width / 2, aqWater.Texture.Height / 2);
         }
 
 

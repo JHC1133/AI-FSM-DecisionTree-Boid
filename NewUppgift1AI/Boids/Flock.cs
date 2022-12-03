@@ -13,7 +13,7 @@ namespace NewUppgift1AI
         AqWater aqWater;
         private List<Boid> boids;
 
-        private int numBoids = 100;
+        private int numBoids = 5;
         private static Random rand = new Random();
 
         public Flock(AqWater aqWater)
@@ -24,7 +24,7 @@ namespace NewUppgift1AI
 
             for (int i = 0; i < numBoids; i++)
             {
-                Boid b = new Boid(rand.Next(0, Game1.WindowX), rand.Next(0, Game1.WindowY), this);
+                Boid b = new Boid(rand.Next(0, aqWater.Texture.Width), rand.Next(0, aqWater.Texture.Height), this, aqWater);
                 Add(b);
             }
 
@@ -67,9 +67,9 @@ namespace NewUppgift1AI
         {
             return new List<Vector2>() {
             new Vector2(boid.position.X, 0),
-            new Vector2(boid.position.X, Game1.WindowX),
+            new Vector2(boid.position.X, aqWater.Texture.Width),
             new Vector2(0, boid.position.Y),
-            new Vector2(Game1.WindowY, boid.position.Y)
+            new Vector2(aqWater.Texture.Height, boid.position.Y)
             };
         }
     }

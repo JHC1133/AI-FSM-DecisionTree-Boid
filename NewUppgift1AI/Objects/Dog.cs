@@ -87,6 +87,7 @@ namespace NewUppgift1AI
             PeeTimerCheck();
             ThirstMeterCheck();
             CheckWallCollision();
+            CheckAquariumCollision();
             WaterAvailabiltyCheck();
             RageModeColorToggle();
 
@@ -123,6 +124,7 @@ namespace NewUppgift1AI
                 SetVelocity(Data.dogRageModeVel);
                 SetDirection(objectManager.robot.Position, Position);
                 CheckWallCollision();
+                //CheckAquariumCollision();
 
             }
             else if (drinkMode)
@@ -205,6 +207,14 @@ namespace NewUppgift1AI
                 {
                     ReverseDirection();
                 }
+            }
+        }
+
+        public void CheckAquariumCollision()
+        {
+            if (Hitbox.Intersects(objectManager.aquarium.Hitbox))
+            {
+                ReverseDirection();
             }
         }
 

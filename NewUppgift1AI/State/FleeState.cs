@@ -37,7 +37,7 @@ namespace NewUppgift1AI
 
             robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
 
-            if (CheckWallCollision())
+            if (CheckWallCollision() || CheckAquariumCollision())
             {
                 robot.ReverseDirection();
             }
@@ -57,6 +57,15 @@ namespace NewUppgift1AI
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        public bool CheckAquariumCollision()
+        {
+            if (robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
+            {
+                return true;
             }
             return false;
         }
