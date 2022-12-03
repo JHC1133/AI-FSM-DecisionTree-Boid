@@ -13,8 +13,8 @@ namespace NewUppgift1AI
         static Random random = new Random();
         Texture2D texture;
 
-        private const int speed = 5;
-        private const int turnSpeed = 30 / speed;
+        private const int speed = 2;
+        private const int turnSpeed = 15 / speed;
 
         public Vector2 position { get; private set; }
         public Vector2 cellPosition { get; private set; }
@@ -61,9 +61,9 @@ namespace NewUppgift1AI
 
         private void Borders()
         {
-            if (position.X < 0 || position.X > aqWater.Texture.Width ||
-                position.Y < 0 || position.Y > aqWater.Texture.Height)
-                position = new Vector2(aqWater.Texture.Width / 2, aqWater.Texture.Height / 2);
+            if (position.X < ((int)aqWater.Position.X) || position.X > aqWater.Texture.Width ||
+                position.Y < ((int)aqWater.Position.Y) || position.Y > aqWater.Texture.Height)
+                position = new Vector2(aqWater.Texture.Width, aqWater.Texture.Height);
         }
 
 
