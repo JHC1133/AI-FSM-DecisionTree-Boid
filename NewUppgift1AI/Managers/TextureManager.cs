@@ -10,7 +10,7 @@ namespace NewUppgift1AI
 {
     internal class TextureManager
     {
-        public static Texture2D dogTex, robotTex, peePuddleTex, woodenFloorTex, wallSideTex, wallTopBotTex, waterBowlEmptyTex, waterBowlFilledTex;
+        public static Texture2D dogTex, robotTex, fishTex, peePuddleTex, woodenFloorTex, wallSideTex, wallTopBotTex, waterBowlEmptyTex, waterBowlFilledTex;
 
         public static void LoadTex(ContentManager content)
         {
@@ -22,6 +22,7 @@ namespace NewUppgift1AI
             wallTopBotTex = content.Load<Texture2D>("wallTopBot");
             waterBowlEmptyTex = content.Load<Texture2D>("waterBowl");
             waterBowlFilledTex = content.Load<Texture2D>("waterBowlFilled");
+            fishTex = content.Load<Texture2D>("fish");
         }
     }
 }

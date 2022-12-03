@@ -17,6 +17,9 @@ namespace NewUppgift1AI
         public static int WindowX => windowX;
         public static int WindowY => windowY;
 
+        public static int cellWidth = WindowX / 30;
+        public static int cellHeight = WindowY / 20;
+
         Rectangle screenRect;
 
         public Game1()
