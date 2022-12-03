@@ -39,7 +39,7 @@ namespace NewUppgift1AI
         public bool peeMode;
         public bool rageMode;
         public bool moveMode;
-
+         
         bool hasDrunk;
         bool hasPeed;
 
