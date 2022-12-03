@@ -21,10 +21,7 @@ namespace NewUppgift1AI.Objects
             this.height = height;
             boidsCount = 10;
 
-            for (int i = 0; i < boidsCount; i++)
-            {
-                boids.Add(new Boid(random, width, height));
-            }
+            
         }
 
     }
