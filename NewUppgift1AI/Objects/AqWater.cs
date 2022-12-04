@@ -12,11 +12,13 @@ namespace NewUppgift1AI
     {
         public Texture2D Texture { get; private set; }
         public Vector2 Position { get; private set; }
+        public Rectangle Hitbox { get; private set; }
 
         public AqWater() 
         {
             Texture = TextureManager.aqWaterTex;
             Position = new Vector2(153, 156); // aquarium X + 23, Y + 26
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

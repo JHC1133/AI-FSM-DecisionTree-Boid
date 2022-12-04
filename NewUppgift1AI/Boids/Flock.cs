@@ -66,10 +66,10 @@ namespace NewUppgift1AI
         private List<Vector2> GetBorderPoints(Boid boid)
         {
             return new List<Vector2>() {
-            new Vector2(boid.position.X, 0),
-            new Vector2(boid.position.X, aqWater.Texture.Width),
-            new Vector2(0, boid.position.Y),
-            new Vector2(aqWater.Texture.Height, boid.position.Y)
+            new Vector2(boid.position.X, aqWater.position.X),
+            new Vector2(boid.position.X, aqWater.Texture.Height),
+            new Vector2(aqWater.position.Y, boid.position.Y),
+            new Vector2(aqWater.Texture.Width, boid.position.Y)
             };
         }
     }

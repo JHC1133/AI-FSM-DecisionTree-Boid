@@ -61,9 +61,12 @@ namespace NewUppgift1AI
 
         private void Borders()
         {
+            int randX = random.Next(130, 564);
+            int randY = random.Next(130, 656);
+
             if (position.X < ((int)aqWater.Position.X) || position.X > aqWater.Texture.Width ||
                 position.Y < ((int)aqWater.Position.Y) || position.Y > aqWater.Texture.Height)
-                position = new Vector2(aqWater.Texture.Width, aqWater.Texture.Height);
+                position = new Vector2(randX, randY);
         }
 
 

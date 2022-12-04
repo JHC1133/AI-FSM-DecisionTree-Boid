@@ -55,6 +55,8 @@ namespace NewUppgift1AI
                     avoid += (boid.position - point) / (float)Math.Pow(distance, 5);
                     count++;
                 }
+
+                //var edgeDistance = Vector2.Distance(boid.position, rectangle.);
             }
 
             if (count != 0)
