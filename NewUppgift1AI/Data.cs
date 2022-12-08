@@ -18,6 +18,14 @@ namespace NewUppgift1AI
         public static Vector2 left = new Vector2(-1, 0);
 
         /// <summary>
+        /// Diagonal Orientation
+        /// </summary>
+        public static Vector2 diagUp = new Vector2(1, -1);
+        public static Vector2 diagDown = new Vector2(-1, 1);
+        public static Vector2 diagRight = new Vector2(1, -1);   //Not finished
+        public static Vector2 diagLeft = new Vector2(-1, 1);
+
+        /// <summary>
         /// Movement
         /// </summary>
         public static float robotDefaultVel = 5.5f;

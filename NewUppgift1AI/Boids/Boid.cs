@@ -66,7 +66,14 @@ namespace NewUppgift1AI
 
             if (position.X < ((int)aqWater.Position.X) || position.X > aqWater.Texture.Width ||
                 position.Y < ((int)aqWater.Position.Y) || position.Y > aqWater.Texture.Height)
-                position = new Vector2(randX, randY);
+            {
+                Vector2 revesereVelocity = velocity *= -1;
+                velocity = revesereVelocity;
+                velocity.Normalize();
+
+                //position = new Vector2(randX, randY);
+
+            }
         }
 
 

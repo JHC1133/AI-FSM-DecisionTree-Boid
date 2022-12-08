@@ -60,21 +60,44 @@ namespace NewUppgift1AI
 
             //Start point
             return Data.up;
+        }
 
-            //switch (outcome)
-            //{
-            //    case 1:
-            //        return Data.up;
-            //    case 2:
-            //        return Data.down;
-            //    case 3:
-            //        return Data.left;
-            //    case 4:
-            //        return Data.right;
-            //}
+        //Not finished
+        public Vector2 RandomDiagonalMovement()
+        {
+            Random random = new Random();
 
-            //return Data.right;
+            float outcome;
 
+            if (currentOrientation == Data.diagUp || currentOrientation == Data.diagDown)
+            {
+                outcome = random.Next(1, 3);
+
+                switch (outcome)
+                {
+                    case 1:
+                        return Data.diagLeft;
+                    case 2:
+                        return Data.diagRight;
+
+                }
+            }
+            else if (currentOrientation == Data.diagLeft || currentOrientation == Data.diagRight)
+            {
+                outcome = random.Next(1, 3);
+
+                switch (outcome)
+                {
+                    case 1:
+                        return Data.diagUp;
+                    case 2:
+                        return Data.diagDown;
+
+                }
+            }
+
+            //Start point
+            return Data.diagUp;
         }
 
         /// <summary>
