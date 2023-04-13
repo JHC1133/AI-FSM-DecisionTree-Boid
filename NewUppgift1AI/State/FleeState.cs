@@ -10,7 +10,7 @@ namespace NewUppgift1AI
 {
     internal class FleeState : State
     {
-        public FleeState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
+        public FleeState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
         }
 
@@ -18,7 +18,7 @@ namespace NewUppgift1AI
         {
             Debug.WriteLine("Robot Enter FLEE");
             
-            robot.SetVelocity(Data.robotFleeModeVel);           
+            objectManager.robot.SetVelocity(Data.robotFleeModeVel);           
         }
 
         public override void Exit()
@@ -35,11 +35,11 @@ namespace NewUppgift1AI
 
             Debug.WriteLine("Robot UPDATE FLEE");
 
-            robot.SetEvadeDirection(objectManager.dog.Position, robot.Position);
+            objectManager.robot.SetEvadeDirection(objectManager.dog.Position, objectManager.robot.Position);
 
             if (CheckWallCollision() || CheckAquariumCollision())
             {
-                robot.ReverseDirection();
+                objectManager.robot.ReverseDirection();
             }
 
             if (!DogRageModeCheck())
@@ -53,7 +53,7 @@ namespace NewUppgift1AI
 
             foreach (Wall wall in objectManager.walls)
             {
-                if (robot.Hitbox.Intersects(wall.Hitbox))
+                if (objectManager.robot.Hitbox.Intersects(wall.Hitbox))
                 {
                     return true;
                 }
@@ -63,7 +63,7 @@ namespace NewUppgift1AI
 
         public bool CheckAquariumCollision()
         {
-            if (robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
+            if (objectManager.robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
             {
                 return true;
             }

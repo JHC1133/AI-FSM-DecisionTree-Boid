@@ -12,7 +12,7 @@ namespace NewUppgift1AI
     {
         int moveDirectionTimer = 13000;
 
-        public MoveState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
+        public MoveState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }
@@ -21,9 +21,9 @@ namespace NewUppgift1AI
         {
 
             Debug.WriteLine("Enter Move");
-            robot.SetVelocity(Data.robotDefaultVel);
+            objectManager.robot.SetVelocity(Data.robotDefaultVel);
 
-            robot.SetDirection(robot.RandomMovement());
+            objectManager.robot.SetDirection(objectManager.robot.RandomMovement());
             
 
         }
@@ -38,15 +38,15 @@ namespace NewUppgift1AI
 
             if (CheckRobotPeeDistance(objectManager.peeList))
             {
-                stateMachine.ChangeState(robot.objectManager.ChaseState);
+                stateMachine.ChangeState(objectManager.robot.objectManager.ChaseState);
             }
             else if (CheckWallCollision() || CheckAquariumCollision())
             {
-                stateMachine.ChangeState(robot.objectManager.CollissionState);
+                stateMachine.ChangeState(objectManager.robot.objectManager.CollissionState);
             }
             else if (DogRageModeCheck())
             {
-                stateMachine.ChangeState(robot.objectManager.FleeState);
+                stateMachine.ChangeState(objectManager.robot.objectManager.FleeState);
             }
 
             
@@ -57,7 +57,7 @@ namespace NewUppgift1AI
 
             foreach (Wall wall in objectManager.walls)
             {
-                if (robot.Hitbox.Intersects(wall.Hitbox))
+                if (objectManager.robot.Hitbox.Intersects(wall.Hitbox))
                 {
                     return true;
                 }
@@ -67,7 +67,7 @@ namespace NewUppgift1AI
 
         public bool CheckAquariumCollision()
         {
-            if (robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
+            if (objectManager.robot.Hitbox.Intersects(objectManager.aquarium.Hitbox))
             {
                 return true;
             }
@@ -78,7 +78,7 @@ namespace NewUppgift1AI
         {
             foreach (Pee pee in peeList)
             {
-                if (robot.GetDistance(robot.Position, pee.position) < robot.DetectionRadius)
+                if (objectManager.robot.GetDistance(objectManager.robot.Position, pee.position) < objectManager.robot.DetectionRadius)
                 {
                     return true;
                 }

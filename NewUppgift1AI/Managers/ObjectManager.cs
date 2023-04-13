@@ -45,7 +45,7 @@ namespace NewUppgift1AI
             flock = new Flock(aqWater);
 
             InitEntities(stateMachine);
-            InitRobotStates(robot, this, stateMachine);
+            InitRobotStates(this, stateMachine);
         }
         public void Update(GameTime gameTime)
         {
@@ -123,13 +123,13 @@ namespace NewUppgift1AI
             dog = new Dog(this);
         }
 
-        private void InitRobotStates(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine)
+        private void InitRobotStates(ObjectManager objectManager, FiniteStateMachine stateMachine)
         {
-            MoveState = new MoveState(robot, objectManager, stateMachine);
-            CollissionState = new CollissionState(robot, objectManager, stateMachine);
-            ChaseState = new ChaseState(robot, this, stateMachine);
-            CleanState = new CleanState(robot, objectManager, stateMachine);
-            FleeState = new FleeState(robot, objectManager, stateMachine);
+            MoveState = new MoveState(objectManager, stateMachine);
+            CollissionState = new CollissionState(objectManager, stateMachine);
+            ChaseState = new ChaseState(this, stateMachine);
+            CleanState = new CleanState(objectManager, stateMachine);
+            FleeState = new FleeState(objectManager, stateMachine);
 
             stateMachine.Initialize(objectManager.MoveState);
         }

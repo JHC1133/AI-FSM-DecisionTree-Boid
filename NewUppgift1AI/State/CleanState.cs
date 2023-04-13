@@ -13,7 +13,7 @@ namespace NewUppgift1AI
         int directionCalculationTimer = 1000;
         int dirCalcTimerDefault = 1000;
 
-        public CleanState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
+        public CleanState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }
@@ -21,7 +21,7 @@ namespace NewUppgift1AI
         public override void Enter()
         {
             Debug.WriteLine("Enter CLEAN");
-            robot.SetVelocity(Data.zero);
+            objectManager.robot.SetVelocity(Data.zero);
         }
 
         public override void Exit()
@@ -35,7 +35,7 @@ namespace NewUppgift1AI
         {
             if (PeeRemover())
             {
-                stateMachine.ChangeState(robot.objectManager.MoveState);
+                stateMachine.ChangeState(objectManager.robot.objectManager.MoveState);
             }
 
             DogRageModeCheck();
@@ -46,7 +46,7 @@ namespace NewUppgift1AI
         {
             foreach (Pee pee in objectManager.peeList)
             {
-                if (robot.GetDistance(robot.Position, pee.position) < 25)
+                if (objectManager.robot.GetDistance(objectManager.robot.Position, pee.position) < 25)
                 {
                     objectManager.peeList.Remove(pee);
                     return true;

@@ -10,12 +10,11 @@ namespace NewUppgift1AI
     abstract class State
     {
         protected FiniteStateMachine stateMachine;
-        protected Robot robot;
+        //protected Robot robot;
         protected ObjectManager objectManager;
 
-        public State(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine)
+        public State(ObjectManager objectManager, FiniteStateMachine stateMachine)
         {
-            this.robot = robot;
             this.objectManager = objectManager;
             this.stateMachine = stateMachine;
         }

@@ -9,7 +9,7 @@ namespace NewUppgift1AI
 {
     internal class ChaseState : State
     {
-        public ChaseState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
+        public ChaseState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }
@@ -18,7 +18,7 @@ namespace NewUppgift1AI
         {
             foreach (Pee pee in objectManager.peeList)
             {
-                robot.SetDirection(pee.position, robot.Position);
+                objectManager.robot.SetDirection(pee.position, objectManager.robot.Position);
             }
         }
 
@@ -31,10 +31,10 @@ namespace NewUppgift1AI
         {
             foreach (Pee pee in objectManager.peeList)
             {
-                if (robot.GetDistance(robot.Position, pee.position) < 25)
+                if (objectManager.robot.GetDistance(objectManager.robot.Position, pee.position) < 25)
                 {
                     
-                    stateMachine.ChangeState(robot.objectManager.CleanState);
+                    stateMachine.ChangeState(objectManager.CleanState);
                 }
             }
 

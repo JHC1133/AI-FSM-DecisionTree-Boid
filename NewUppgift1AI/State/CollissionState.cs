@@ -16,7 +16,7 @@ namespace NewUppgift1AI
         int directionCalcDefault = 550;
         int directionCalculationTimer = 550;
 
-        public CollissionState(Robot robot, ObjectManager objectManager, FiniteStateMachine stateMachine) : base(robot, objectManager, stateMachine)
+        public CollissionState(ObjectManager objectManager, FiniteStateMachine stateMachine) : base(objectManager, stateMachine)
         {
 
         }
@@ -24,7 +24,7 @@ namespace NewUppgift1AI
         public override void Enter()
         {
             Debug.WriteLine("Enter Collission");
-            robot.ReverseDirection();
+            objectManager.robot.ReverseDirection();
         }
 
         public override void Exit()
@@ -41,13 +41,13 @@ namespace NewUppgift1AI
 
             if (timer <= 0)
             {
-                robot.SetVelocity(Data.zero);
+                objectManager.robot.SetVelocity(Data.zero);
 
                 directionCalculationTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (directionCalculationTimer <= 0)
                 {
-                    stateMachine.ChangeState(robot.objectManager.MoveState);
+                    stateMachine.ChangeState(objectManager.robot.objectManager.MoveState);
                 }
             }
             DogRageModeCheck();
